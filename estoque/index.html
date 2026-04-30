@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estoque Completo — Jotacar Seminovos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--black:#050505;--dark:#0d0d0d;--dark2:#151515;--dark3:#1e1e1e;--gray:#2c2c2c;--gold:#C9A84C;--gold2:#E8C96A;--white:#F5F0E8;--muted:#666;--font-display:'Bebas Neue',sans-serif;--font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);}
+::-webkit-scrollbar{width:3px;};::-webkit-scrollbar-thumb{background:var(--gold);}
+nav{position:sticky;top:0;z-index:100;background:rgba(5,5,5,0.97);padding:1rem 4rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,0.1);backdrop-filter:blur(10px);}
+.nav-logo{font-family:var(--font-display);font-size:1.5rem;letter-spacing:0.15em;color:var(--white);text-decoration:none;}
+.nav-logo span{color:var(--gold);}
+.nav-back{font-family:var(--font-head);font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(201,168,76,0.3);padding:0.5rem 1.2rem;transition:all 0.2s;}
+.nav-back:hover{background:rgba(201,168,76,0.1);}
+.page-head{padding:5rem 4rem 3rem;}
+.page-tag{font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.75rem;}
+.page-title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);letter-spacing:0.03em;}
+.page-title span{color:var(--gold);}
+.page-count{font-family:var(--font-head);font-size:0.8rem;color:var(--muted);margin-top:0.5rem;}
+.filters{display:flex;align-items:center;gap:0.75rem;padding:0 4rem 2.5rem;flex-wrap:wrap;}
+.f-input{flex:1;min-width:180px;background:var(--dark2);border:none;border-bottom:2px solid var(--gray);color:var(--white);padding:0.8rem 0.5rem;font-family:var(--font-body);font-size:0.85rem;outline:none;transition:border-color 0.2s;}
+.f-input:focus{border-color:var(--gold);}
+.f-sel{background:var(--dark2);border:none;border-bottom:2px solid var(--gray);color:var(--white);padding:0.8rem 0.5rem;font-family:var(--font-body);font-size:0.85rem;outline:none;cursor:pointer;min-width:130px;transition:border-color 0.2s;}
+.f-sel:focus{border-color:var(--gold);}
+.f-reset{background:transparent;border:1px solid rgba(201,168,76,0.25);color:var(--gold);padding:0.8rem 1.2rem;font-family:var(--font-head);font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.f-reset:hover{background:rgba(201,168,76,0.08);}
+#s-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:rgba(201,168,76,0.05);padding:0 4rem 6rem;}
+.v-card{background:var(--dark);cursor:pointer;overflow:hidden;transition:all 0.3s;}
+.v-card:hover{background:var(--dark2);}
+.v-img{height:200px;overflow:hidden;background:var(--dark3);position:relative;}
+.v-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s,filter 0.3s;filter:brightness(0.85);}
+.v-card:hover .v-img img{transform:scale(1.07);filter:brightness(1);}
+.v-fipe{position:absolute;top:0.75rem;left:0.75rem;background:var(--gold);color:var(--black);font-family:var(--font-head);font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:0.2rem 0.5rem;}
+.v-cat{position:absolute;top:0.75rem;right:0.75rem;background:rgba(0,0,0,0.75);border:1px solid rgba(201,168,76,0.2);color:rgba(245,240,232,0.7);font-family:var(--font-head);font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.5rem;}
+.v-info{padding:1.25rem 1.5rem 1.5rem;}
+.v-brand{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.2rem;}
+.v-name{font-family:var(--font-head);font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:0.4rem;line-height:1.2;}
+.v-meta{font-size:0.78rem;color:var(--muted);margin-bottom:1rem;}
+.v-price-row{display:flex;align-items:flex-end;justify-content:space-between;}
+.v-price{font-family:var(--font-display);font-size:1.5rem;color:var(--gold);line-height:1;}
+.v-btn{background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--gold);padding:0.5rem 1rem;font-family:var(--font-head);font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.v-card:hover .v-btn{background:var(--gold);color:var(--black);}
+.no-res{grid-column:1/-1;text-align:center;padding:4rem;color:var(--muted);font-family:var(--font-head);font-size:0.85rem;letter-spacing:0.1em;}
+/* MODAL */
+.modal-bg{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;padding:2rem;}
+.modal-bg.open{display:flex;}
+.modal-box{background:var(--dark);width:100%;max-width:920px;max-height:90vh;overflow-y:auto;position:relative;border:1px solid rgba(201,168,76,0.1);}
+.m-close{position:absolute;top:1rem;right:1rem;z-index:5;width:36px;height:36px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);color:var(--gold);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;}
+.m-close:hover{background:var(--gold);color:var(--black);}
+.m-gallery{height:380px;background:var(--dark3);position:relative;overflow:hidden;}
+.m-gallery img{width:100%;height:100%;object-fit:cover;}
+.m-gall-nav{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 1rem;}
+.g-btn{width:40px;height:40px;background:rgba(0,0,0,0.7);border:1px solid rgba(201,168,76,0.3);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;font-size:1rem;}
+.g-btn:hover{background:var(--gold);color:var(--black);}
+.m-dots{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:0.4rem;}
+.m-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;}
+.m-dot.on{background:var(--gold);}
+.m-body{padding:2rem 2.5rem;}
+.m-brand{font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;}
+.m-title{font-family:var(--font-display);font-size:1.8rem;letter-spacing:0.03em;margin-bottom:0.5rem;}
+.m-price{font-family:var(--font-display);font-size:2.2rem;color:var(--gold);margin-bottom:2rem;line-height:1;}
+.m-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem;border-top:1px solid var(--gray);border-bottom:1px solid var(--gray);padding:1.5rem 0;}
+.ms-lbl{font-family:var(--font-head);font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.ms-val{font-family:var(--font-head);font-size:0.9rem;font-weight:600;}
+.m-acess-title{font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;}
+.m-acess-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:2rem;}
+.m-tag{background:var(--dark3);border:1px solid var(--gray);padding:0.25rem 0.6rem;font-size:0.72rem;color:rgba(245,240,232,0.6);}
+.m-wpp{width:100%;background:#25D366;color:#fff;border:none;padding:1.1rem;font-family:var(--font-head);font-size:0.9rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.75rem;}
+.m-wpp:hover{background:#1fba57;}
+.float-w{position:fixed;bottom:2rem;right:2rem;z-index:999;background:#25D366;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,0.35);text-decoration:none;transition:all 0.3s;}
+.float-w:hover{transform:scale(1.1);}
+.float-w svg{width:26px;height:26px;fill:white;}
+@media(max-width:768px){nav{padding:1rem 1.5rem;}.page-head{padding:3rem 1.5rem 2rem;}.filters{padding:0 1.5rem 2rem;}#s-grid{padding:0 0 4rem;grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">JOTA<span>CAR</span></a>
+  <a href="index.html" class="nav-back">← Voltar ao site</a>
+</nav>
+<div class="page-head">
+  <span class="page-tag">Disponível agora</span>
+  <h1 class="page-title">Estoque <span>Completo</span></h1>
+  <p class="page-count" id="pcount"></p>
+</div>
+<div class="filters">
+  <input type="text" class="f-input" id="fs" placeholder="🔍  Buscar marca ou modelo...">
+  <select class="f-sel" id="fcat"><option value="">Categoria</option><option value="moto">Moto</option><option value="hatch">Hatch</option><option value="sedan">Sedan</option><option value="suv">SUV</option><option value="picape">Picape</option><option value="outros">Outros</option></select>
+  <select class="f-sel" id="fmarca"><option value="">Marca</option></select>
+  <select class="f-sel" id="fano"><option value="">Ano</option></select>
+  <select class="f-sel" id="fpreco"><option value="">Faixa de Preço</option><option value="0-50000">Até R$ 50k</option><option value="50000-80000">R$ 50k–80k</option><option value="80000-130000">R$ 80k–130k</option><option value="130000-999999">Acima de R$ 130k</option></select>
+  <button class="f-reset" onclick="resetF()">✕ Limpar</button>
+</div>
+<div id="s-grid"></div>
+<!-- MODAL -->
+<div class="modal-bg" id="modal">
+  <div class="modal-box">
+    <div class="m-close" onclick="closeM()">✕</div>
+    <div class="m-gallery"><img id="m-img" src="" alt=""><div class="m-gall-nav"><div class="g-btn" onclick="pImg(-1)">&#8592;</div><div class="g-btn" onclick="pImg(1)">&#8594;</div></div><div class="m-dots" id="m-dots"></div></div>
+    <div class="m-body">
+      <div class="m-brand" id="m-brand"></div>
+      <div class="m-title" id="m-title"></div>
+      <div class="m-price" id="m-price"></div>
+      <div class="m-specs" id="m-specs"></div>
+      <div id="m-acess"></div>
+      <button class="m-wpp" onclick="wppCar()"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Tenho Interesse — WhatsApp</button>
+    </div>
+  </div>
+</div>
+<a href="https://wa.me/5554992222216" class="float-w" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<script>
+const WPP='5554992222216';
+const VEHICLES=[
+  {vehicle_id:8020401,title:"HONDA CBR 600RR 2011",category:"MOTO",make:"HONDA",model:"CBR 600-RR",year:2011,fabric_year:2011,fuel:"GASOLINA",gear:"Manual",color:"BRANCO",price:"45900.00",valor_fipe:"44856.00",mileage:"0",body_type:null,hp:"0",doors:0,motorization:"599.0",accessories:"",images_large:["https://s3.carro57.com.br/FC/10861/8020401_5_W_6b4b0ac94f.jpeg","https://s3.carro57.com.br/FC/10861/8020401_0_W_5f7abe5163.jpeg","https://s3.carro57.com.br/FC/10861/8020401_5_W_fa322566a4.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_e422a43437.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_28622c7ac3.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_2bc1a8db1b.jpeg"]},
+  {vehicle_id:7808834,title:"FIAT SIENA ESSENCE 1.6 2014",category:"AUTOMÓVEL",make:"FIAT",model:"SIENA ESSENCE 1.6",year:2014,fabric_year:2013,fuel:"FLEX",gear:"Semi-automático",color:"PRETO",price:"39900.00",valor_fipe:0,mileage:"0",body_type:"sedan",hp:"117",doors:5,motorization:"1.6",accessories:"ABS,Airbag,Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve,Som Multimídia,Rádio Bluetooth",images_large:["https://s3.carro57.com.br/FC/10861/7808834_4_W_dede1d0418.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_44fbde5866.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_dc1672da50.jpeg","https://s3.carro57.com.br/FC/10861/7808834_0_W_353afd3d97.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_bee5fba397.jpeg"]},
+  {vehicle_id:7914466,title:"CHEVROLET CRUZE LT NB 2012",category:"AUTOMÓVEL",make:"CHEVROLET",model:"CRUZE LT NB",year:2012,fabric_year:2012,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"53900.00",valor_fipe:"51033.00",mileage:"0",body_type:"sedan",hp:"144",doors:5,motorization:"1.8",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve,Computador de Bordo,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7914466_4_W_edf130ce12.jpeg","https://s3.carro57.com.br/FC/10861/7914466_0_W_3c2caf3fbc.jpeg","https://s3.carro57.com.br/FC/10861/7914466_6_W_e367d69fe3.jpeg","https://s3.carro57.com.br/FC/10861/7914466_0_W_3b31ac833d.jpeg"]},
+  {vehicle_id:8027564,title:"HONDA HR-V EXL CVT 2020",category:"AUTOMÓVEL",make:"HONDA",model:"HR-V EXL CVT",year:2020,fabric_year:2019,fuel:"FLEX",gear:"CVT",color:"CINZA",price:"114900.00",valor_fipe:"108916.00",mileage:"117000",body_type:"suv",hp:"140",doors:4,motorization:"1.8",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,Direção Elétrica,GPS,Piloto Automático,Rádio Bluetooth",images_large:["https://s3.carro57.com.br/FC/10861/8027564_0_W_14bdb2e966.jpeg","https://s3.carro57.com.br/FC/10861/8027564_4_W_cbebcfba61.jpeg","https://s3.carro57.com.br/FC/10861/8027564_5_W_23ad4384f3.jpeg","https://s3.carro57.com.br/FC/10861/8027564_5_W_02e421cbc9.jpeg"]},
+  {vehicle_id:8007075,title:"TOYOTA RAV4 4X2 2019",category:"AUTOMÓVEL",make:"TOYOTA",model:"RAV4 4X2 20L",year:2019,fabric_year:2018,fuel:"GASOLINA",gear:"CVT",color:"BRANCO",price:"129900.00",valor_fipe:"129922.00",mileage:"0",body_type:"suv",hp:"145",doors:5,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,GPS,Teto Solar,Piloto Automático",images_large:["https://s3.carro57.com.br/FC/10861/8007075_1_W_963a4b12a1.jpeg","https://s3.carro57.com.br/FC/10861/8007075_1_W_63d2f2f2b2.jpeg","https://s3.carro57.com.br/FC/10861/8007075_1_W_3b73cb433a.jpeg","https://s3.carro57.com.br/FC/10861/8007075_0_W_f6d2ff68e9.jpeg"]},
+  {vehicle_id:8010559,title:"BMW X2 SDRIVE20I 2019",category:"AUTOMÓVEL",make:"BMW",model:"X2 SDRIVE20I",year:2019,fabric_year:2018,fuel:"GASOLINA",gear:"Automático",color:"PRETO",price:"173900.00",valor_fipe:"163880.00",mileage:"0",body_type:"suv",hp:"192",doors:4,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Teto Solar,Farol de Led,GPS,Turbo",images_large:["https://s3.carro57.com.br/FC/10861/8010559_6_W_69655949dc.jpeg","https://s3.carro57.com.br/FC/10861/8010559_1_W_54ee9c744b.jpeg","https://s3.carro57.com.br/FC/10861/8010559_6_W_b06925ff3f.jpeg","https://s3.carro57.com.br/FC/10861/8010559_1_W_9eb251d888.jpeg"]},
+  {vehicle_id:7445142,title:"SUZUKI GSX-S750 2022",category:"MOTO",make:"SUZUKI",model:"GSX-S750 A",year:2022,fabric_year:2021,fuel:"GASOLINA",gear:"Manual",color:"PRETO",price:"55900.00",valor_fipe:"51030.00",mileage:"7800",body_type:null,hp:"114",doors:0,motorization:"749.0",accessories:"",images_large:["https://s3.carro57.com.br/FC/10861/7445142_0_W_59c3e52a64.jpeg","https://s3.carro57.com.br/FC/10861/7445142_0_W_9029fb7ac0.jpeg","https://s3.carro57.com.br/FC/10861/7445142_1_W_64897b879a.jpeg"]},
+  {vehicle_id:7973922,title:"CHEVROLET CRUZE LTZ NB 2018",category:"AUTOMÓVEL",make:"CHEVROLET",model:"CHEV CRUZE LTZ NB AT",year:2018,fabric_year:2017,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"91900.00",valor_fipe:"86258.00",mileage:"0",body_type:"sedan",hp:"153",doors:4,motorization:"1.4",accessories:"ABS,Airbag,Bancos de Couro,GPS,Turbo,Piloto Automático,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/7973922_0_W_f633dd1bef.jpeg","https://s3.carro57.com.br/FC/10861/7973922_4_W_85faebd912.jpeg","https://s3.carro57.com.br/FC/10861/7973922_2_W_48291f3c06.jpeg"]},
+  {vehicle_id:7869196,title:"VOLKSWAGEN GOL 2015",category:"AUTOMÓVEL",make:"VOLKSWAGEN",model:"GOL TL MB S",year:2015,fabric_year:2014,fuel:"FLEX",gear:"Manual",color:"BRANCO",price:"38900.00",valor_fipe:"36585.00",mileage:"0",body_type:"hatch",hp:"76",doors:5,motorization:"1.0",accessories:"ABS,Airbag,Ar-condicionado,Direção Hidráulica,Trava Elétrica,Vidros Elétricos",images_large:["https://s3.carro57.com.br/FC/10861/7869196_2_W_e848e84bab.jpeg","https://s3.carro57.com.br/FC/10861/7869196_4_W_3d623ee088.jpeg","https://s3.carro57.com.br/FC/10861/7869196_2_W_d6b36705a2.jpeg"]},
+  {vehicle_id:7970323,title:"MITSUBISHI PAJERO TR4 2007",category:"AUTOMÓVEL",make:"MITSUBISHI",model:"PAJERO TR4",year:2007,fabric_year:2007,fuel:"GASOLINA",gear:"Automático",color:"PRETO",price:"47900.00",valor_fipe:"43115.00",mileage:"0",body_type:"suv",hp:"131",doors:5,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Câmbio Automático,Rodas de Liga Leve,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7970323_5_W_cb2c2817a5.jpeg","https://s3.carro57.com.br/FC/10861/7970323_1_W_319b12e7da.jpeg","https://s3.carro57.com.br/FC/10861/7970323_0_W_1737868cfa.jpeg"]},
+  {vehicle_id:6503860,title:"TOYOTA HILUX 2018",category:"AUTOMÓVEL",make:"TOYOTA",model:"HILUX CDSRXA4FD",year:2018,fabric_year:2017,fuel:"DIESEL",gear:"Automático",color:"PRATA",price:"197900.00",valor_fipe:"187401.00",mileage:"0",body_type:"caminhonete",hp:"177",doors:4,motorization:"2.8",accessories:"ABS,Airbag,Bancos de Couro,GPS,Teto Solar,Turbo,Câmera de ré,Farol de Led",images_large:["https://s3.carro57.com.br/FC/10861/6503860_1_W_aa295036a7.jpeg","https://s3.carro57.com.br/FC/10861/6503860_0_W_18094e307d.jpeg","https://s3.carro57.com.br/FC/10861/6503860_0_W_027ab3f58d.jpeg"]},
+  {vehicle_id:7799622,title:"RENAULT SANDERO 2021",category:"AUTOMÓVEL",make:"RENAULT",model:"SANDERO SZE16MT",year:2021,fabric_year:2020,fuel:"FLEX",gear:"Manual",color:"PRATA",price:"62900.00",valor_fipe:"59439.00",mileage:"0",body_type:"hatch",hp:"118",doors:4,motorization:"1.6",accessories:"ABS,Airbag,Ar-condicionado,Rodas de Liga Leve,Sensor de estacionamento",images_large:["https://s3.carro57.com.br/FC/10861/7799622_3_W_ce091c0b35.jpeg","https://s3.carro57.com.br/FC/10861/7799622_3_W_871efb921b.jpeg","https://s3.carro57.com.br/FC/10861/7799622_3_W_a815208c3b.jpeg"]},
+  {vehicle_id:7409059,title:"HONDA CIVIC SPORT CVT 2017",category:"AUTOMÓVEL",make:"HONDA",model:"CIVIC SPORT CVT",year:2017,fabric_year:2016,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"102900.00",valor_fipe:"99204.00",mileage:"120000",body_type:"sedan",hp:"155",doors:4,motorization:"2.0",accessories:"ABS,Airbag,GPS,Farol de Led,Câmera de ré,Piloto Automático",images_large:["https://s3.carro57.com.br/FC/10861/7409059_0_W_7b9504d56e.jpeg","https://s3.carro57.com.br/FC/10861/7409059_3_W_0f9bd598ec.jpeg","https://s3.carro57.com.br/FC/10861/7409059_1_W_818e220320.jpeg"]},
+  {vehicle_id:7591422,title:"CITROEN C3 AIRCROSS 2012",category:"AUTOMÓVEL",make:"CITROEN",model:"C3 AIRCROSS GLXA",year:2012,fabric_year:2011,fuel:"FLEX",gear:"Automático",color:"PRATA",price:"39900.00",valor_fipe:"30445.00",mileage:"92000",body_type:"suv",hp:"113",doors:5,motorization:"1.6",accessories:"Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7591422_2_W_2477fd6e90.jpeg","https://s3.carro57.com.br/FC/10861/7591422_7_W_c16d990ecb.jpeg","https://s3.carro57.com.br/FC/10861/7591422_1_W_0984cc76e0.jpeg"]},
+  {vehicle_id:7813728,title:"CHEVROLET MERIVA PREMIUM 2011",category:"AUTOMÓVEL",make:"CHEVROLET",model:"MERIVA PREMIUM",year:2011,fabric_year:2010,fuel:"FLEX",gear:"Semi-automático",color:"PRETO",price:"27900.00",valor_fipe:"30168.00",mileage:"0",body_type:null,hp:"114",doors:5,motorization:"1.8",accessories:"Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7813728_6_W_108b961ebb.jpeg","https://s3.carro57.com.br/FC/10861/7813728_2_W_664652fc72.jpeg","https://s3.carro57.com.br/FC/10861/7813728_3_W_35291edbe2.jpeg"]},
+  {vehicle_id:8019098,title:"FORD FOCUS SE 1.6 2017",category:"AUTOMÓVEL",make:"FORD",model:"FOCUS SE 1.6 HC",year:2017,fabric_year:2017,fuel:"FLEX",gear:"Manual",color:"CINZA",price:"72900.00",valor_fipe:0,mileage:"0",body_type:"hatch",hp:"135",doors:4,motorization:"1.6",accessories:"ABS,Airbag,Bancos de Couro,GPS,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/8019098_5_W_c8110edea7.jpeg","https://s3.carro57.com.br/FC/10861/8019098_5_W_1b6f31d8e4.jpeg","https://s3.carro57.com.br/FC/10861/8019098_1_W_cf9ec19eaf.jpeg"]},
+  {vehicle_id:8011266,title:"JEEP COMPASS SPORT 2022",category:"AUTOMÓVEL",make:"JEEP",model:"COMPASS SPORT TF",year:2022,fabric_year:2021,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"0.00",valor_fipe:"108897.00",mileage:"0",body_type:"suv",hp:"185",doors:4,motorization:"1.3",accessories:"ABS,Airbag,Bancos de Couro,GPS,Farol de Led,Turbo,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/8011266_4_W_9f1120f017.jpeg","https://s3.carro57.com.br/FC/10861/8011266_3_W_e16e8a7c98.jpeg","https://s3.carro57.com.br/FC/10861/8011266_4_W_0e7145635d.jpeg"]},
+  {vehicle_id:7757483,title:"JEEP RENEGADE LNGTD 2016",category:"AUTOMÓVEL",make:"JEEP",model:"RENEGADE LNGTD AT",year:2016,fabric_year:2015,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"75900.00",valor_fipe:"66372.00",mileage:"0",body_type:"suv",hp:"132",doors:4,motorization:"1.8",accessories:"ABS,Airbag,Teto Solar,GPS,Câmera de ré,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7757483_1_W_9222bece10.jpeg","https://s3.carro57.com.br/FC/10861/7757483_5_W_c96a4bd143.jpeg","https://s3.carro57.com.br/FC/10861/7757483_5_W_382ed9a1d7.jpeg"]},
+  {vehicle_id:7913290,title:"TOYOTA YARIS HB 2019",category:"AUTOMÓVEL",make:"TOYOTA",model:"YARIS HB XLPLUSAT",year:2019,fabric_year:2019,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"79900.00",valor_fipe:"75201.00",mileage:"0",body_type:"hatch",hp:"101",doors:4,motorization:"1.3",accessories:"ABS,Airbag,Ar-condicionado,GPS,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/7913290_4_W_ea6524901c.jpeg","https://s3.carro57.com.br/FC/10861/7913290_2_W_73bf15b1ab.jpeg","https://s3.carro57.com.br/FC/10861/7913290_4_W_113d363fc6.jpeg"]},
+  {vehicle_id:7937030,title:"VOLKSWAGEN GOLF 1.6 2009",category:"AUTOMÓVEL",make:"VOLKSWAGEN",model:"GOLF 1.6 SPORTLINE",year:2009,fabric_year:2008,fuel:"FLEX",gear:"Manual",color:"PRATA",price:"44900.00",valor_fipe:"43166.00",mileage:"0",body_type:"hatch",hp:"104",doors:5,motorization:"1.6",accessories:"ABS,Airbag,Bancos de Couro,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7937030_6_W_8caf561276.jpeg","https://s3.carro57.com.br/FC/10861/7937030_3_W_ac70ef8c65.jpeg","https://s3.carro57.com.br/FC/10861/7937030_3_W_c8a98c7bfe.jpeg"]}
+];
+let curV=null,curImg=0,imgs=[];
+function detectCat(v){if(v.category==='MOTO')return'moto';const b=(v.body_type||'').toLowerCase();const m=(v.model||v.title||'').toLowerCase();if(b==='hatch'||m.includes('gol')||m.includes('polo')||m.includes('golf')||m.includes('focus')||m.includes('yaris')||m.includes('sandero'))return'hatch';if(b==='sedan'||m.includes('civic')||m.includes('corolla')||m.includes('cruze')||m.includes('siena'))return'sedan';if(b==='suv'||m.includes('hrv')||m.includes('compass')||m.includes('renegade')||m.includes('rav4')||m.includes('x2')||m.includes('pajero')||m.includes('aircross'))return'suv';if(b==='caminhonete'||m.includes('hilux'))return'picape';return'outros';}
+function populateFilters(vs){const ms=[...new Set(vs.map(v=>v.make).filter(Boolean))].sort();const as=[...new Set(vs.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a);const mSel=document.getElementById('fmarca'),aSel=document.getElementById('fano');ms.forEach(m=>mSel.innerHTML+=`<option value="${m}">${m}</option>`);as.forEach(a=>aSel.innerHTML+=`<option value="${a}">${a}</option>`);}
+function renderStock(vs){const g=document.getElementById('s-grid');document.getElementById('pcount').textContent=vs.length+' veículo'+(vs.length!==1?'s':'')+' encontrado'+(vs.length!==1?'s':'');if(!vs.length){g.innerHTML='<div class="no-res">Nenhum veículo encontrado.</div>';return;}g.innerHTML=vs.map(v=>{const img=(v.images_large&&v.images_large[0])||'';const p=parseFloat(v.price),fipe=parseFloat(v.valor_fipe);const isFipe=p>0&&fipe>0&&p<fipe;const pFmt=p>0?'R$ '+p.toLocaleString('pt-BR'):'Consultar';const ano=v.fabric_year&&v.year&&String(v.fabric_year)!==String(v.year)?`${v.fabric_year}/${v.year}`:String(v.year||'');const km=parseFloat(v.mileage||0);const kmFmt=km>0?km.toLocaleString('pt-BR')+' km':'—';return`<div class="v-card" onclick="openM(${v.vehicle_id})"><div class="v-img">${img?`<img src="${img}" alt="${v.model}" loading="lazy">`:'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#333">🚗</div>'}<div class="v-fipe">${isFipe?'⭐ ABAIXO DA FIPE':''}</div><div class="v-cat">${detectCat(v).toUpperCase()}</div></div><div class="v-info"><div class="v-brand">${v.make||''}</div><div class="v-name">${(v.model||v.title||'').toUpperCase()}</div><div class="v-meta">${ano} · ${kmFmt} · ${v.color||''}</div><div class="v-price-row"><div class="v-price">${pFmt}</div><button class="v-btn">Ver →</button></div></div></div>`;}).join('');}
+function applyF(){const s=document.getElementById('fs').value.toLowerCase();const cat=document.getElementById('fcat').value;const marca=document.getElementById('fmarca').value;const ano=document.getElementById('fano').value;const pr=document.getElementById('fpreco').value;let f=VEHICLES.filter(v=>{const full=((v.make||'')+(v.model||v.title||'')).toLowerCase();if(s&&!full.includes(s))return false;if(cat&&detectCat(v)!==cat)return false;if(marca&&v.make!==marca)return false;if(ano&&String(v.year)!==ano)return false;if(pr){const[min,max]=pr.split('-').map(Number);const p=parseFloat(v.price||0);if(p<min||p>max)return false;}return true;});renderStock(f);}
+function resetF(){['fs','fcat','fmarca','fano','fpreco'].forEach(id=>document.getElementById(id).value='');renderStock(VEHICLES);}
+['fs','fcat','fmarca','fano','fpreco'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('change',applyF);if(id==='fs')el.addEventListener('input',applyF);});
+function openM(id){const v=VEHICLES.find(x=>x.vehicle_id===id);if(!v)return;curV=v;imgs=v.images_large||[];curImg=0;document.getElementById('m-brand').textContent=v.make||'';document.getElementById('m-title').textContent=(v.model||v.title||'').toUpperCase();const p=parseFloat(v.price);document.getElementById('m-price').textContent=p>0?'R$ '+p.toLocaleString('pt-BR'):'Consultar preço';document.getElementById('m-img').src=imgs[0]||'';const ano=v.fabric_year&&v.year&&String(v.fabric_year)!==String(v.year)?`${v.fabric_year}/${v.year}`:String(v.year||'');const km=parseFloat(v.mileage||0);document.getElementById('m-specs').innerHTML=[{l:'Ano',v:ano},{l:'KM',v:km>0?km.toLocaleString('pt-BR')+' km':'—'},{l:'Cor',v:v.color||'—'},{l:'Câmbio',v:v.gear||'—'},{l:'Combustível',v:v.fuel||'—'},{l:'Motor',v:v.motorization?v.motorization+' L':'—'}].map(s=>`<div><div class="ms-lbl">${s.l}</div><div class="ms-val">${s.v}</div></div>`).join('');const acs=(v.accessories||'').split(',').filter(a=>a.trim());document.getElementById('m-acess').innerHTML=acs.length?`<div class="m-acess-title">Acessórios</div><div class="m-acess-tags">${acs.map(a=>`<span class="m-tag">${a.trim()}</span>`).join('')}</div>`:'';document.getElementById('m-dots').innerHTML=imgs.map((_,i)=>`<div class="m-dot${i===0?' on':''}" onclick="setImg(${i})"></div>`).join('');document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
+function closeM(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+function setImg(i){curImg=i;document.getElementById('m-img').src=imgs[i]||'';document.querySelectorAll('.m-dot').forEach((d,j)=>d.classList.toggle('on',j===i));}
+function pImg(d){setImg((curImg+d+imgs.length)%imgs.length);}
+function wppCar(){if(!curV)return;const model=(curV.make||'')+' '+(curV.model||curV.title||'');const msg=encodeURIComponent(`Olá! Tenho interesse no veículo:\n🚗 *${model} ${curV.year}*\n\nGostaria de mais informações e condições de pagamento.`);window.open(`https://wa.me/${WPP}?text=${msg}`,'_blank');}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeM();});
+populateFilters(VEHICLES);
+renderStock(VEHICLES);
+</script>
+</body>
+</html>
