@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jotacar Seminovos — Caxias do Sul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #050505;
+  --dark: #0d0d0d;
+  --dark2: #151515;
+  --dark3: #1e1e1e;
+  --gray: #2c2c2c;
+  --gold: #C9A84C;
+  --gold2: #E8C96A;
+  --gold3: #8B6914;
+  --white: #F5F0E8;
+  --muted: #666;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:var(--gold);}
+
+/* ── LOADER ── */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--black);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 0.6s, visibility 0.6s;
+}
+#loader.done{opacity:0;visibility:hidden;}
+.loader-logo{
+  font-family:var(--font-display);
+  font-size:clamp(3rem,8vw,6rem);
+  letter-spacing:0.3em;
+  color:var(--white);
+  margin-bottom:2rem;
+  animation: loaderPulse 1.5s infinite;
+}
+.loader-logo span{color:var(--gold);}
+.loader-bar-wrap{
+  width:200px;height:2px;
+  background:rgba(201,168,76,0.15);
+  position:relative;overflow:hidden;
+}
+.loader-bar{
+  height:100%;width:0%;
+  background:var(--gold);
+  transition:width 0.05s linear;
+}
+.loader-text{
+  font-family:var(--font-head);
+  font-size:0.65rem;letter-spacing:0.4em;
+  text-transform:uppercase;color:var(--muted);
+  margin-top:1rem;
+}
+@keyframes loaderPulse{0%,100%{opacity:1}50%{opacity:0.6}}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:1.5rem 3rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:all 0.3s;
+}
+nav.scrolled{
+  background:rgba(5,5,5,0.97);
+  padding:1rem 3rem;
+  border-bottom:1px solid rgba(201,168,76,0.1);
+  backdrop-filter:blur(10px);
+}
+.nav-logo{
+  font-family:var(--font-display);
+  font-size:1.8rem;letter-spacing:0.15em;
+  color:var(--white);
+}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{
+  font-family:var(--font-head);
+  font-size:0.78rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:rgba(245,240,232,0.6);
+  text-decoration:none;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--gold);}
+.nav-wpp{
+  background:var(--gold);color:var(--black)!important;
+  padding:0.55rem 1.3rem;
+  font-weight:700!important;
+  opacity:1!important;
+}
+.nav-wpp:hover{background:var(--gold2)!important;}
+
+/* ── HERO ── */
+#hero{
+  height:100vh;
+  position:relative;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;
+  padding:0 8vw 8vh;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url("data:image/jpeg;base64,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");
+  background-size:cover;background-position:center;
+  filter:brightness(0.25) contrast(1.1);
+  transform:scale(1.05);
+  animation:heroZoom 12s ease forwards;
+}
+@keyframes heroZoom{from{transform:scale(1.05)}to{transform:scale(1)}}
+.hero-grain{
+  position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.4;pointer-events:none;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.3) 50%, transparent 100%);
+}
+.hero-side-line{
+  position:absolute;left:3rem;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  font-family:var(--font-head);font-size:0.6rem;
+  letter-spacing:0.4em;text-transform:uppercase;
+  color:rgba(201,168,76,0.5);
+  writing-mode:vertical-rl;
+  z-index:2;
+}
+.side-line-rule{width:1px;height:60px;background:var(--gold);opacity:0.3;}
+.hero-content{position:relative;z-index:2;}
+.hero-eyebrow{
+  font-family:var(--font-head);
+  font-size:0.75rem;font-weight:700;
+  letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:1.5rem;
+  opacity:0;animation:fadeSlide 0.8s 1.5s forwards;
+  display:flex;align-items:center;gap:1rem;
+}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--gold);}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(3rem,7vw,6.5rem);
+  line-height:0.85;
+  letter-spacing:0.02em;
+  margin-bottom:2rem;
+  opacity:0;animation:fadeSlide 0.8s 1.7s forwards;
+}
+.hero-title .gold{color:var(--gold);display:block;}
+.hero-sub{
+  font-family:var(--font-body);
+  font-size:clamp(0.9rem,1.5vw,1.1rem);
+  font-weight:300;
+  color:rgba(245,240,232,0.6);
+  max-width:480px;line-height:1.8;
+  margin-bottom:3rem;
+  opacity:0;animation:fadeSlide 0.8s 1.9s forwards;
+}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:fadeSlide 0.8s 2.1s forwards;
+}
+.btn-primary{
+  background:var(--gold);color:var(--black);
+  padding:1rem 2.5rem;
+  font-family:var(--font-head);font-size:0.85rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  border:none;cursor:pointer;text-decoration:none;
+  display:inline-block;transition:all 0.25s;
+}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-3px);}
+.btn-ghost{
+  border:1px solid rgba(201,168,76,0.4);color:var(--gold);
+  padding:1rem 2.5rem;
+  font-family:var(--font-head);font-size:0.85rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  background:transparent;cursor:pointer;text-decoration:none;
+  display:inline-block;transition:all 0.25s;
+}
+.btn-ghost:hover{background:rgba(201,168,76,0.08);transform:translateY(-3px);}
+.hero-stats{
+  position:absolute;right:4rem;bottom:6vh;
+  display:flex;flex-direction:column;gap:2rem;
+  z-index:2;text-align:right;
+  opacity:0;animation:fadeSlide 0.8s 2.3s forwards;
+}
+.hstat-num{
+  font-family:var(--font-display);
+  font-size:2.8rem;color:var(--gold);line-height:1;
+}
+.hstat-label{
+  font-family:var(--font-head);
+  font-size:0.65rem;font-weight:600;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);
+}
+.hero-scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  font-family:var(--font-head);font-size:0.6rem;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:rgba(201,168,76,0.4);
+  animation:bounce 2s infinite;
+}
+.scroll-dot{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── HORIZONTAL SECTION ── */
+#h-section{
+  height:100vh;position:relative;overflow:hidden;
+}
+#h-track{
+  display:flex;height:100%;
+  transition:transform 0.7s cubic-bezier(0.77,0,0.175,1);
+}
+.h-slide{
+  min-width:100vw;height:100vh;
+  display:flex;align-items:center;
+  padding:8rem 8vw;
+  position:relative;overflow:hidden;
+  background:var(--dark);
+}
+.h-slide::after{
+  content:'';
+  position:absolute;right:0;top:0;bottom:0;
+  width:1px;background:rgba(201,168,76,0.08);
+}
+.slide-num{
+  position:absolute;top:8rem;right:8vw;
+  font-family:var(--font-display);
+  font-size:8rem;color:rgba(201,168,76,0.04);
+  line-height:1;pointer-events:none;
+}
+.slide-tag{
+  font-family:var(--font-head);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:2rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.slide-tag::before{content:'';width:30px;height:1px;background:var(--gold);}
+.slide-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.5rem,4.5vw,4.5rem);
+  line-height:0.9;letter-spacing:0.02em;
+  margin-bottom:1.5rem;
+}
+.slide-title span{color:var(--gold);display:block;}
+.slide-text{
+  font-size:0.95rem;font-weight:300;
+  color:rgba(245,240,232,0.55);
+  line-height:1.9;max-width:480px;
+}
+
+/* Numbers grid */
+.nums-wrap{width:100%;}
+.nums-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;border-top:1px solid rgba(201,168,76,0.1);
+  margin-top:4rem;
+}
+.num-cell{
+  padding:2.5rem 2rem;
+  border-right:1px solid rgba(201,168,76,0.1);
+}
+.num-cell:last-child{border-right:none;}
+.num-val{
+  font-family:var(--font-display);
+  font-size:clamp(2.5rem,4vw,4rem);
+  color:var(--gold);line-height:1;
+}
+.num-lbl{
+  font-family:var(--font-head);font-size:0.7rem;font-weight:600;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);margin-top:0.5rem;
+}
+
+/* Diferenciais */
+.dif-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(201,168,76,0.08);
+  width:100%;margin-top:3rem;
+}
+.dif-item{
+  background:var(--dark);padding:2rem;
+  transition:background 0.3s;
+}
+.dif-item:hover{background:rgba(201,168,76,0.04);}
+.dif-ico{font-size:1.5rem;margin-bottom:0.75rem;}
+.dif-t{
+  font-family:var(--font-head);font-size:0.9rem;font-weight:700;
+  letter-spacing:0.05em;text-transform:uppercase;
+  margin-bottom:0.4rem;
+}
+.dif-d{font-size:0.82rem;color:rgba(245,240,232,0.5);line-height:1.7;}
+
+/* Pagamento tags */
+.pag-wrap{margin-top:3rem;display:flex;flex-wrap:wrap;gap:0.75rem;}
+.pag-chip{
+  border:1px solid rgba(201,168,76,0.25);
+  color:var(--gold);
+  padding:0.65rem 1.2rem;
+  font-family:var(--font-head);font-size:0.8rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  background:rgba(201,168,76,0.04);
+  transition:all 0.2s;
+}
+.pag-chip:hover{background:rgba(201,168,76,0.1);}
+
+/* H-nav */
+.h-nav{
+  position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:0.75rem;z-index:10;
+}
+.h-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(201,168,76,0.25);
+  cursor:pointer;transition:all 0.3s;
+}
+.h-dot.on{background:var(--gold);width:28px;border-radius:3px;}
+.h-arr{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;
+  background:rgba(201,168,76,0.06);
+  border:1px solid rgba(201,168,76,0.15);
+  color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:1.1rem;z-index:10;
+  transition:all 0.2s;
+}
+.h-arr:hover{background:rgba(201,168,76,0.15);}
+.h-arr-l{left:1.5rem;}
+.h-arr-r{right:1.5rem;}
+
+/* ── ESTOQUE ── */
+#estoque{padding:8rem 0;background:var(--black);}
+.sec-head{text-align:center;padding:0 4rem;margin-bottom:4rem;}
+.sec-tag{
+  display:block;
+  font-family:var(--font-head);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;
+}
+.sec-title{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,4vw,3.5rem);
+  letter-spacing:0.03em;
+}
+.sec-title span{color:var(--gold);}
+
+/* Filters */
+.filters{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0 5rem;flex-wrap:wrap;margin-bottom:3rem;
+}
+.f-input{
+  flex:1;min-width:180px;
+  background:var(--dark2);
+  border:1px solid var(--gray);
+  border-bottom:2px solid var(--gray);
+  color:var(--white);
+  padding:0.8rem 1rem;
+  font-family:var(--font-body);font-size:0.85rem;
+  outline:none;transition:border-color 0.2s;
+}
+.f-input:focus{border-color:var(--gold);}
+.f-sel{
+  background:var(--dark2);
+  border:1px solid var(--gray);
+  border-bottom:2px solid var(--gray);
+  color:var(--white);
+  padding:0.8rem 1rem;
+  font-family:var(--font-body);font-size:0.85rem;
+  outline:none;cursor:pointer;min-width:130px;
+  transition:border-color 0.2s;
+}
+.f-sel:focus{border-color:var(--gold);}
+.f-reset{
+  background:transparent;
+  border:1px solid rgba(201,168,76,0.25);
+  color:var(--gold);
+  padding:0.8rem 1.2rem;
+  font-family:var(--font-head);font-size:0.75rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.2s;
+}
+.f-reset:hover{background:rgba(201,168,76,0.08);}
+
+/* Stock grid */
+#s-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
+  gap:1px;
+  background:rgba(201,168,76,0.05);
+  padding:0 5rem;
+}
+.s-loading{
+  grid-column:1/-1;text-align:center;
+  padding:5rem;color:var(--muted);
+  font-family:var(--font-head);letter-spacing:0.2em;font-size:0.8rem;
+  text-transform:uppercase;
+}
+.v-card{
+  background:var(--dark);
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:all 0.35s;
+  group: true;
+}
+.v-card:hover{background:var(--dark2);z-index:1;}
+.v-img{
+  height:210px;overflow:hidden;
+  background:var(--dark3);
+  position:relative;
+}
+.v-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.5s;
+  filter:brightness(0.85);
+}
+.v-card:hover .v-img img{transform:scale(1.08);filter:brightness(1);}
+.v-fipe{
+  position:absolute;top:0.75rem;left:0.75rem;
+  background:var(--gold);color:var(--black);
+  font-family:var(--font-head);font-size:0.6rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:0.2rem 0.5rem;
+}
+.v-cat{
+  position:absolute;top:0.75rem;right:0.75rem;
+  background:rgba(0,0,0,0.75);
+  border:1px solid rgba(201,168,76,0.2);
+  color:rgba(245,240,232,0.7);
+  font-family:var(--font-head);font-size:0.6rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:0.2rem 0.5rem;
+}
+.v-info{padding:1.25rem 1.5rem 1.5rem;}
+.v-brand{
+  font-family:var(--font-head);font-size:0.65rem;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:0.2rem;
+}
+.v-name{
+  font-family:var(--font-head);font-size:1rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.03em;
+  margin-bottom:0.4rem;line-height:1.2;
+}
+.v-meta{
+  font-size:0.78rem;color:var(--muted);
+  margin-bottom:1rem;
+}
+.v-price-row{
+  display:flex;align-items:flex-end;justify-content:space-between;
+}
+.v-price{
+  font-family:var(--font-display);
+  font-size:1.6rem;color:var(--gold);line-height:1;
+}
+.v-btn{
+  background:transparent;
+  border:1px solid rgba(201,168,76,0.3);
+  color:var(--gold);
+  padding:0.5rem 1rem;
+  font-family:var(--font-head);font-size:0.7rem;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.2s;
+}
+.v-btn:hover,.v-card:hover .v-btn{background:var(--gold);color:var(--black);}
+.no-res{
+  grid-column:1/-1;text-align:center;padding:4rem;
+  color:var(--muted);font-family:var(--font-head);
+  font-size:0.85rem;letter-spacing:0.1em;
+}
+
+/* ── MODAL ── */
+.modal-bg{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(0,0,0,0.95);
+  display:none;align-items:center;justify-content:center;
+  padding:2rem;
+}
+.modal-bg.open{display:flex;}
+.modal-box{
+  background:var(--dark);
+  width:100%;max-width:920px;
+  max-height:90vh;overflow-y:auto;
+  position:relative;
+  border:1px solid rgba(201,168,76,0.1);
+}
+.m-close{
+  position:absolute;top:1rem;right:1rem;z-index:5;
+  width:36px;height:36px;
+  background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.2);
+  color:var(--gold);font-size:1rem;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all 0.2s;
+}
+.m-close:hover{background:var(--gold);color:var(--black);}
+.m-gallery{height:380px;background:var(--dark3);position:relative;overflow:hidden;}
+.m-gallery img{width:100%;height:100%;object-fit:cover;}
+.m-gall-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:100%;display:flex;justify-content:space-between;padding:0 1rem;
+}
+.g-btn{
+  width:40px;height:40px;background:rgba(0,0,0,0.7);
+  border:1px solid rgba(201,168,76,0.3);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all 0.2s;font-size:1rem;
+}
+.g-btn:hover{background:var(--gold);color:var(--black);}
+.m-dots{
+  position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:0.4rem;
+}
+.m-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;}
+.m-dot.on{background:var(--gold);}
+.m-body{padding:2rem 2.5rem;}
+.m-brand{
+  font-family:var(--font-head);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:0.4rem;
+}
+.m-title{
+  font-family:var(--font-display);font-size:1.8rem;letter-spacing:0.03em;
+  margin-bottom:0.5rem;
+}
+.m-price{
+  font-family:var(--font-display);font-size:2.5rem;color:var(--gold);
+  margin-bottom:2rem;line-height:1;
+}
+.m-specs{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;
+  margin-bottom:2rem;
+  border-top:1px solid var(--gray);border-bottom:1px solid var(--gray);
+  padding:1.5rem 0;
+}
+.ms-lbl{
+  font-family:var(--font-head);font-size:0.65rem;font-weight:600;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:0.25rem;
+}
+.ms-val{
+  font-family:var(--font-head);font-size:0.9rem;font-weight:600;
+}
+.m-acess{
+  margin-bottom:2rem;
+}
+.m-acess-title{
+  font-family:var(--font-head);font-size:0.7rem;font-weight:700;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:0.75rem;
+}
+.m-acess-tags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.m-tag{
+  background:var(--dark3);
+  border:1px solid var(--gray);
+  padding:0.25rem 0.6rem;
+  font-size:0.72rem;color:rgba(245,240,232,0.6);
+}
+.m-wpp{
+  width:100%;background:#25D366;color:#fff;
+  border:none;padding:1.1rem;
+  font-family:var(--font-head);font-size:0.9rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;gap:0.75rem;
+}
+.m-wpp:hover{background:#1fba57;transform:translateY(-2px);}
+
+/* ── FINANCIAMENTO ── */
+#financiamento{
+  padding:8rem 8vw;
+  background:var(--dark);
+  position:relative;overflow:hidden;
+}
+#financiamento::before{
+  content:'JOTACAR';
+  position:absolute;bottom:-2rem;right:-1rem;
+  font-family:var(--font-display);
+  font-size:18rem;color:rgba(201,168,76,0.02);
+  letter-spacing:0.05em;pointer-events:none;line-height:1;
+}
+.fin-layout{
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;
+  align-items:start;max-width:1200px;margin:0 auto;
+}
+.fin-left .sec-head{text-align:left;padding:0;margin-bottom:2rem;}
+.fin-promise{
+  margin-top:3rem;
+  display:flex;flex-direction:column;gap:1.25rem;
+}
+.fp-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  padding-bottom:1.25rem;
+  border-bottom:1px solid rgba(201,168,76,0.08);
+}
+.fp-item:last-child{border-bottom:none;}
+.fp-ico{
+  width:36px;height:36px;
+  background:rgba(201,168,76,0.08);
+  border:1px solid rgba(201,168,76,0.15);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:1rem;
+}
+.fp-text{font-size:0.85rem;color:rgba(245,240,232,0.6);line-height:1.7;}
+.fp-text strong{color:var(--white);font-weight:600;display:block;margin-bottom:0.2rem;}
+.fin-form{
+  background:var(--dark2);
+  border:1px solid rgba(201,168,76,0.1);
+  border-top:3px solid var(--gold);
+  padding:2.5rem;
+}
+.form-title{
+  font-family:var(--font-display);
+  font-size:1.5rem;letter-spacing:0.05em;
+  margin-bottom:2rem;
+}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem;}
+.ff{display:flex;flex-direction:column;gap:0.35rem;}
+.ff label{
+  font-family:var(--font-head);font-size:0.65rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);
+}
+.ff input,.ff select{
+  background:var(--dark3);
+  border:none;border-bottom:1px solid var(--gray);
+  color:var(--white);
+  padding:0.75rem 0;
+  font-family:var(--font-body);font-size:0.9rem;
+  outline:none;transition:border-color 0.2s;
+  width:100%;
+}
+.ff input:focus,.ff select:focus{border-color:var(--gold);}
+.ff.full{grid-column:1/-1;}
+.fin-btn{
+  width:100%;margin-top:1.5rem;
+  background:var(--gold);color:var(--black);
+  border:none;padding:1.1rem;
+  font-family:var(--font-head);font-size:0.9rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;
+  cursor:pointer;transition:all 0.2s;
+}
+.fin-btn:hover{background:var(--gold2);transform:translateY(-2px);}
+
+/* ── DEPOIMENTOS ── */
+#depoimentos{
+  padding:8rem 8vw;background:var(--black);
+}
+.dep-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(201,168,76,0.06);
+  margin-top:4rem;
+}
+.dep-card{
+  background:var(--dark);
+  padding:2.5rem;
+  position:relative;
+  transition:background 0.3s;
+}
+.dep-card:hover{background:var(--dark2);}
+.dep-stars{color:var(--gold);letter-spacing:0.1em;margin-bottom:1.5rem;}
+.dep-q{
+  position:absolute;top:1.5rem;right:1.5rem;
+  font-family:var(--font-display);font-size:5rem;
+  color:rgba(201,168,76,0.05);line-height:1;pointer-events:none;
+}
+.dep-text{
+  font-size:0.9rem;line-height:1.9;
+  color:rgba(245,240,232,0.65);font-style:italic;
+  margin-bottom:2rem;
+}
+.dep-by{
+  font-family:var(--font-head);font-size:0.75rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);
+}
+
+/* ── INSTAGRAM ── */
+#instagram{
+  padding:8rem 8vw;background:var(--dark);
+}
+.insta-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:3px;margin-top:3rem;
+}
+.ig-item{
+  aspect-ratio:1;overflow:hidden;
+  position:relative;cursor:pointer;
+  background:var(--dark3);
+}
+.ig-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.4s,filter 0.3s;
+  filter:brightness(0.7) saturate(0.8);
+}
+.ig-item:hover img{transform:scale(1.08);filter:brightness(0.9) saturate(1);}
+.ig-overlay{
+  position:absolute;inset:0;
+  background:rgba(201,168,76,0);
+  transition:background 0.3s;
+  display:flex;align-items:center;justify-content:center;
+}
+.ig-item:hover .ig-overlay{background:rgba(201,168,76,0.12);}
+.ig-icon{
+  font-size:1.5rem;opacity:0;transition:opacity 0.3s;
+  color:var(--gold);
+}
+.ig-item:hover .ig-icon{opacity:1;}
+.ig-cta{
+  text-align:center;margin-top:2.5rem;
+}
+.ig-cta a{
+  font-family:var(--font-head);font-size:0.8rem;font-weight:700;
+  letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--gold);text-decoration:none;
+  border-bottom:1px solid rgba(201,168,76,0.3);
+  padding-bottom:0.25rem;
+  transition:border-color 0.2s;
+}
+.ig-cta a:hover{border-color:var(--gold);}
+
+/* ── MAPA ── */
+#mapa{padding:8rem 8vw;background:var(--black);}
+.mapa-grid{
+  display:grid;grid-template-columns:1fr 1.6fr;
+  gap:5rem;align-items:center;
+  max-width:1200px;margin:0 auto;
+}
+.mapa-left{}
+.mapa-info-list{margin-top:3rem;}
+.mi{
+  display:flex;gap:1.25rem;
+  padding:1.5rem 0;
+  border-bottom:1px solid rgba(201,168,76,0.08);
+}
+.mi:last-of-type{border-bottom:none;}
+.mi-ico{
+  width:40px;height:40px;
+  background:rgba(201,168,76,0.06);
+  border:1px solid rgba(201,168,76,0.12);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;font-size:1rem;
+  color:var(--gold);
+}
+.mi-lbl{
+  font-family:var(--font-head);font-size:0.65rem;font-weight:700;
+  letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:0.25rem;
+}
+.mi-val{font-size:0.9rem;line-height:1.6;}
+.map-frame{
+  height:450px;
+  border:1px solid rgba(201,168,76,0.1);
+  overflow:hidden;
+  position:relative;
+}
+.map-frame iframe{width:100%;height:100%;border:none;filter:grayscale(1) invert(0.85) contrast(0.9);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--dark);
+  border-top:1px solid rgba(201,168,76,0.08);
+  padding:3rem 8vw;
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;gap:2rem;
+}
+.f-brand{
+  font-family:var(--font-display);
+  font-size:1.5rem;letter-spacing:0.15em;
+}
+.f-brand span{color:var(--gold);}
+.f-copy{
+  font-family:var(--font-head);font-size:0.7rem;
+  letter-spacing:0.1em;color:var(--muted);
+  text-align:center;
+}
+.f-wpp{
+  text-align:right;
+}
+.f-wpp a{
+  background:rgba(37,211,102,0.08);
+  border:1px solid rgba(37,211,102,0.25);
+  color:#25D366;
+  padding:0.65rem 1.5rem;
+  font-family:var(--font-head);font-size:0.75rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  text-decoration:none;transition:all 0.2s;
+  display:inline-block;
+}
+.f-wpp a:hover{background:rgba(37,211,102,0.15);}
+
+/* ── FLOAT WPP ── */
+.float-w{
+  position:fixed;bottom:2rem;right:2rem;z-index:999;
+  background:#25D366;width:58px;height:58px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 24px rgba(37,211,102,0.35);
+  text-decoration:none;transition:all 0.3s;
+  animation:wppPulse 3s infinite;
+}
+.float-w:hover{transform:scale(1.12);}
+.float-w svg{width:28px;height:28px;fill:white;}
+.float-tip{
+  position:absolute;right:68px;
+  background:var(--dark);border:1px solid var(--gray);
+  color:var(--white);padding:0.5rem 0.9rem;
+  font-family:var(--font-head);font-size:0.72rem;white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity 0.2s;
+}
+.float-w:hover .float-tip{opacity:1;}
+@keyframes wppPulse{
+  0%,100%{box-shadow:0 4px 24px rgba(37,211,102,0.35);}
+  50%{box-shadow:0 4px 36px rgba(37,211,102,0.6);}
+}
+
+/* ── REVEAL ── */
+.rev{opacity:0;transform:translateY(35px);transition:opacity 0.7s,transform 0.7s;}
+.rev.on{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  #hero{padding:0 5vw 8vh;}
+  .hero-stats{display:none;}
+  .hero-side-line{display:none;}
+  .h-slide{padding:6rem 5vw;}
+  .nums-row{grid-template-columns:1fr 1fr;}
+  .dif-grid{grid-template-columns:1fr;}
+  #s-grid{padding:0 1.5rem;grid-template-columns:1fr 1fr;}
+  .filters{padding:0 1.5rem;}
+  #financiamento{padding:5rem 5vw;}
+  .fin-layout{grid-template-columns:1fr;gap:3rem;}
+  #depoimentos{padding:5rem 5vw;}
+  .dep-grid{grid-template-columns:1fr;}
+  #instagram{padding:5rem 5vw;}
+  .insta-grid{grid-template-columns:repeat(3,1fr);}
+  #mapa{padding:5rem 5vw;}
+  .mapa-grid{grid-template-columns:1fr;}
+  footer{grid-template-columns:1fr;text-align:center;padding:2rem 5vw;}
+  .f-wpp{text-align:center;}
+}
+
+/* ── SCROLL SNAP ── */
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+section, #h-section { scroll-snap-align: start; }
+#hero { scroll-snap-align: start; }
+
+/* ── PARALLAX HERO ── */
+.hero-bg { transform: scale(1.1); will-change: transform; }
+
+/* ── SECTION ENTRANCE ANIMATIONS ── */
+.sec-enter { opacity: 0; transform: translateY(60px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+.sec-enter.visible { opacity: 1; transform: translateY(0); }
+.sec-enter-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+.sec-enter-left.visible { opacity: 1; transform: translateX(0); }
+.sec-enter-right { opacity: 0; transform: translateX(60px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+.sec-enter-right.visible { opacity: 1; transform: translateX(0); }
+
+/* ── REELS INSTAGRAM ── */
+#instagram { padding: 8rem 8vw; background: var(--dark); }
+.reels-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 3rem; }
+.reel-item {
+  aspect-ratio: 9/16;
+  position: relative; overflow: hidden;
+  cursor: pointer; background: var(--dark3);
+  border: 1px solid rgba(201,168,76,0.08);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s;
+}
+.reel-item:hover { transform: scale(1.03); border-color: rgba(201,168,76,0.3); }
+.reel-item img { width:100%; height:100%; object-fit:cover; filter:brightness(0.7); transition:filter 0.4s,transform 0.5s; }
+.reel-item:hover img { filter:brightness(0.9); transform:scale(1.06); }
+.reel-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+  display:flex; flex-direction:column; justify-content:space-between;
+  padding:0.75rem;
+}
+.reel-top { display:flex; justify-content:flex-end; }
+.reel-play {
+  width:36px; height:36px; border-radius:50%;
+  background:rgba(201,168,76,0.15);
+  border:1px solid rgba(201,168,76,0.4);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gold); font-size:0.9rem;
+  opacity:0; transition:opacity 0.3s;
+}
+.reel-item:hover .reel-play { opacity:1; }
+.reel-bottom {}
+.reel-logo {
+  font-family:var(--font-display); font-size:0.9rem; letter-spacing:0.1em;
+  color:rgba(245,240,232,0.9); margin-bottom:0.25rem;
+}
+.reel-logo span { color:var(--gold); }
+.reel-caption { font-family:var(--font-head); font-size:0.65rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(245,240,232,0.5); }
+@media(max-width:768px) {
+  .reels-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">JOTA<span>CAR</span></div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="lb"></div></div>
+  <p class="loader-text">Carregando estoque...</p>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">JOTA<span>CAR</span></div>
+  <ul class="nav-links">
+    <li><a href="#estoque">Estoque</a></li>
+    <li><a href="#financiamento">Financiamento</a></li>
+    <li><a href="#depoimentos">Clientes</a></li>
+    <li><a href="#mapa">Localização</a></li>
+    <li><a href="https://wa.me/5554992222216" class="nav-wpp" target="_blank">Falar com Julia</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-side-line"><div class="side-line-rule"></div>Caxias do Sul RS<div class="side-line-rule"></div></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Seminovos com procedência</div>
+    <h1 class="hero-title">Seu<br>próximo<br><span class="gold">carro.</span></h1>
+    <p class="hero-sub">Atendimento premium, estoque selecionado e as melhores condições de pagamento da Serra Gaúcha.</p>
+    <div class="hero-btns">
+      <a href="#estoque" class="btn-primary">Ver Estoque</a>
+      <a href="#financiamento" class="btn-ghost">Simular Financiamento</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div><div class="hstat-num" id="hs1">0</div><div class="hstat-label">Veículos em<br>estoque</div></div>
+    <div><div class="hstat-num">10+</div><div class="hstat-label">Anos de<br>mercado</div></div>
+  </div>
+  <div class="hero-scroll-hint"><span>scroll</span><div class="scroll-dot"></div></div>
+</section>
+
+<!-- HORIZONTAL -->
+<div id="h-section">
+  <div id="h-track">
+
+    <!-- Slide 1 — Números -->
+    <div class="h-slide">
+      <div class="slide-num">01</div>
+      <div style="width:100%">
+        <p class="slide-tag">Jotacar em números</p>
+        <h2 class="slide-title">Confiança<br><span>comprovada.</span></h2>
+        <div class="nums-row">
+          <div class="num-cell rev"><div class="num-val" data-c="500">0+</div><div class="num-lbl">Veículos vendidos</div></div>
+          <div class="num-cell rev" style="transition-delay:0.1s"><div class="num-val" data-c="98">0%</div><div class="num-lbl">Satisfação</div></div>
+          <div class="num-cell rev" style="transition-delay:0.2s"><div class="num-val" data-c="10">0+</div><div class="num-lbl">Anos de mercado</div></div>
+          <div class="num-cell rev" style="transition-delay:0.3s"><div class="num-val" id="scount">—</div><div class="num-lbl">No estoque agora</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2 — Diferenciais -->
+    <div class="h-slide">
+      <div class="slide-num">02</div>
+      <div style="width:100%">
+        <p class="slide-tag">Por que a Jotacar</p>
+        <h2 class="slide-title">Qualidade<br><span>garantida.</span></h2>
+        <div class="dif-grid">
+          <div class="dif-item rev"><div class="dif-ico">✅</div><div class="dif-t">Procedência Comprovada</div><div class="dif-d">Todos os veículos passam por rigorosa inspeção antes de entrar no nosso estoque.</div></div>
+          <div class="dif-item rev" style="transition-delay:0.1s"><div class="dif-ico">🚫</div><div class="dif-t">Sem Leilão ou Sinistro</div><div class="dif-d">Nunca comercializamos veículos de leilão, sinistrados ou com histórico irregular.</div></div>
+          <div class="dif-item rev" style="transition-delay:0.2s"><div class="dif-ico">🤖</div><div class="dif-t">IA 24h — Julia</div><div class="dif-d">Atendimento via WhatsApp a qualquer hora com nossa consultora inteligente.</div></div>
+          <div class="dif-item rev" style="transition-delay:0.3s"><div class="dif-ico">🏆</div><div class="dif-t">Melhor Negociação</div><div class="dif-d">Seu veículo na troca, financiamento facilitado e as melhores condições da Serra.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3 — Pagamento -->
+    <div class="h-slide">
+      <div class="slide-num">03</div>
+      <div>
+        <p class="slide-tag">Formas de pagamento</p>
+        <h2 class="slide-title rev">Sem<br>burocracia.<br><span>Sem enrolação.</span></h2>
+        <p class="slide-text rev" style="transition-delay:0.15s">Aprovação rápida direto pelo WhatsApp. Trabalhamos com os principais bancos do Brasil.</p>
+        <div class="pag-wrap">
+          <div class="pag-chip rev" style="transition-delay:0.2s">💵 À Vista / Pix</div>
+          <div class="pag-chip rev" style="transition-delay:0.25s">💳 Cartão até 21x</div>
+          <div class="pag-chip rev" style="transition-delay:0.3s">🏦 Financiamento</div>
+          <div class="pag-chip rev" style="transition-delay:0.35s">🔄 Consórcio</div>
+          <div class="pag-chip rev" style="transition-delay:0.4s">🚗 Troca com Avaliação</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="h-nav" id="h-nav">
+    <div class="h-dot on" onclick="goP(0)"></div>
+    <div class="h-dot" onclick="goP(1)"></div>
+    <div class="h-dot" onclick="goP(2)"></div>
+  </div>
+  <div class="h-arr h-arr-l" onclick="chP(-1)">&#8592;</div>
+  <div class="h-arr h-arr-r" onclick="chP(1)">&#8594;</div>
+</div>
+
+<!-- ESTOQUE -->
+<section id="estoque">
+  <div class="sec-head sec-enter">
+    <span class="sec-tag">Disponível agora</span>
+    <h2 class="sec-title">Destaques do <span>Estoque</span></h2>
+  </div>
+  <div id="s-grid"></div>
+  <div style="text-align:center;padding:3rem 0 1rem">
+    <a href="estoque.html" style="display:inline-flex;align-items:center;gap:0.75rem;background:transparent;border:1px solid rgba(201,168,76,0.35);color:var(--gold);padding:1rem 3rem;font-family:var(--font-head);font-size:0.85rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;transition:all 0.25s;" onmouseover="this.style.background='rgba(201,168,76,0.1)'" onmouseout="this.style.background='transparent'">
+      Ver Estoque Completo →
+    </a>
+    <p style="font-family:var(--font-head);font-size:0.7rem;color:var(--muted);margin-top:0.75rem;letter-spacing:0.1em;">20 VEÍCULOS DISPONÍVEIS</p>
+  </div>
+</section>
+
+<!-- FINANCIAMENTO -->
+<section id="financiamento">
+  <div class="fin-layout">
+    <div class="fin-left">
+      <div class="sec-head sec-enter">
+        <span class="sec-tag">Crédito facilitado</span>
+        <h2 class="sec-title">Simule seu<br><span>Financiamento</span></h2>
+      </div>
+      <div class="fin-promise">
+        <div class="fp-item rev"><div class="fp-ico">⚡</div><div class="fp-text"><strong>Aprovação em minutos</strong>Resposta rápida via WhatsApp, sem burocracia e sem sair de casa.</div></div>
+        <div class="fp-item rev" style="transition-delay:0.1s"><div class="fp-ico">🏦</div><div class="fp-text"><strong>Melhores bancos</strong>Parceria com BV, Pan, Santander e outros para a melhor taxa.</div></div>
+        <div class="fp-item rev" style="transition-delay:0.2s"><div class="fp-ico">🔄</div><div class="fp-text"><strong>Seu carro como entrada</strong>Avaliamos seu veículo atual e abatemos direto no financiamento.</div></div>
+      </div>
+    </div>
+    <div class="fin-form rev" style="transition-delay:0.2s">
+      <h3 class="form-title">Preencha e simule</h3>
+      <form id="ff" onsubmit="submitFin(event)">
+        <div class="fg">
+          <div class="ff"><label>Nome *</label><input type="text" id="fn" placeholder="Seu nome completo" required></div>
+          <div class="ff"><label>Telefone *</label><input type="tel" id="ft" placeholder="(54) 9 9999-9999" required></div>
+          <div class="ff"><label>CPF</label><input type="text" id="fcpf" placeholder="000.000.000-00"></div>
+          <div class="ff"><label>Nascimento</label><input type="date" id="fn2"></div>
+          <div class="ff"><label>Veículo de Interesse</label><input type="text" id="fv" placeholder="Ex: Honda HR-V 2020"></div>
+          <div class="ff"><label>Valor de Entrada</label><input type="text" id="fe" placeholder="Ex: R$ 15.000"></div>
+          <div class="ff"><label>Renda Mensal</label><select id="fr"><option value="">Selecione</option><option>Até R$ 2.000</option><option>R$ 2.000 – R$ 4.000</option><option>R$ 4.000 – R$ 8.000</option><option>Acima de R$ 8.000</option></select></div>
+          <div class="ff"><label>Possui troca?</label><select id="ftr"><option value="Não">Não</option><option value="Sim">Sim</option></select></div>
+          <div class="ff full"><label>Observações</label><input type="text" id="fo" placeholder="Algum detalhe adicional?"></div>
+        </div>
+        <button type="submit" class="fin-btn">📲 Enviar Simulação pelo WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="sec-head sec-enter">
+    <span class="sec-tag">O que dizem nossos clientes</span>
+    <h2 class="sec-title">Avaliações <span>Reais</span></h2>
+  </div>
+  <div class="dep-grid">
+    <div class="dep-card rev"><div class="dep-q">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Comprei meu Jeep Compass na Jotacar e fui muito bem atendido. Todo o processo foi transparente, sem surpresas. Recomendo demais!</p><div class="dep-by">— Rafael Oliveira</div></div>
+    <div class="dep-card rev" style="transition-delay:0.1s"><div class="dep-q">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Melhor concessionária de Caxias! Encontrei o carro ideal, fiz a troca do meu antigo e fui tratada com muito respeito.</p><div class="dep-by">— Fernanda Costa</div></div>
+    <div class="dep-card rev" style="transition-delay:0.2s"><div class="dep-q">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Financiei pelo WhatsApp com a Julia, foi tudo muito rápido. Em 2 dias estava com o carro em mãos. Atendimento de outro nível!</p><div class="dep-by">— Lucas Martinelli</div></div>
+    <div class="dep-card rev" style="transition-delay:0.3s"><div class="dep-q">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Procedência garantida é diferencial real. Confiei na Jotacar e não me arrependo. Já é a segunda vez que compro aqui.</p><div class="dep-by">— Adriana Zanon</div></div>
+    <div class="dep-card rev" style="transition-delay:0.4s"><div class="dep-q">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Encontrei um HR-V abaixo da FIPE! Os preços são justos e o atendimento presencial é excelente. Sensacional!</p><div class="dep-by">— Diego Benetti</div></div>
+    <div class="dep-card rev" style="transition-delay:0.5s"><div class="dep-q">"</div><div class="dep-stars">★★★★★</div><p class="dep-text">Trabalhei com a Julia pelo WhatsApp antes mesmo de ir à loja. Quando cheguei, tudo estava pronto. Incrível!</p><div class="dep-by">— Patrícia Rech</div></div>
+  </div>
+</section>
+
+<!-- INSTAGRAM REELS -->
+<section id="instagram">
+  <div class="sec-head sec-enter">
+    <span class="sec-tag">Siga a gente</span>
+    <h2 class="sec-title">@jotacar<span>_rs</span></h2>
+    <p style="font-family:var(--font-head);font-size:0.8rem;color:var(--muted);margin-top:0.75rem;letter-spacing:0.1em;">CLIQUE PARA VER NO INSTAGRAM</p>
+  </div>
+  <div class="reels-grid" id="reels-grid"></div>
+  <div class="ig-cta" style="margin-top:2.5rem"><a href="https://www.instagram.com/jotacar_rs/" target="_blank">Seguir @jotacar_rs →</a></div>
+</section>
+
+<!-- MAPA -->
+<section id="mapa">
+  <div class="mapa-grid">
+    <div class="mapa-left">
+      <div class="sec-head rev" style="text-align:left;padding:0;margin-bottom:0">
+        <span class="sec-tag">Como chegar</span>
+        <h2 class="sec-title">Visite<br><span>nossa loja</span></h2>
+      </div>
+      <div class="mapa-info-list">
+        <div class="mi rev"><div class="mi-ico">📍</div><div><div class="mi-lbl">Endereço</div><div class="mi-val">R. Evaristo de Antoni, 2393<br>São José — Caxias do Sul, RS</div></div></div>
+        <div class="mi rev" style="transition-delay:0.1s"><div class="mi-ico">🕐</div><div><div class="mi-lbl">Horário</div><div class="mi-val">Segunda a Sexta: 9h às 18h<br>Sábado: 8h30 às 17h</div></div></div>
+        <div class="mi rev" style="transition-delay:0.2s"><div class="mi-ico">📞</div><div><div class="mi-lbl">Telefone / WhatsApp</div><div class="mi-val">(54) 99222-2216<br>(54) 3538-5208</div></div></div>
+        <div class="mi rev" style="transition-delay:0.3s"><div class="mi-ico">✉️</div><div><div class="mi-lbl">E-mail</div><div class="mi-val">jotacaradm@gmail.com</div></div></div>
+      </div>
+      <a href="https://maps.app.goo.gl/ovn2KqvchfG33ErK6" target="_blank" class="btn-primary" style="display:inline-block;margin-top:2rem">📍 Abrir no Maps</a>
+    </div>
+    <div class="map-frame rev" style="transition-delay:0.2s">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464!2d-51.1739!3d-29.1743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sRua+Evaristo+de+Antoni+2393+Caxias+do+Sul!5e0!3m2!1spt-BR!2sbr!4v1" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">JOTA<span>CAR</span></div>
+  <p class="f-copy">© 2025 Jotacar Seminovos — Caxias do Sul, RS<br>Todos os direitos reservados.</p>
+  <div class="f-wpp"><a href="https://wa.me/5554992222216" target="_blank">💬 WhatsApp</a></div>
+</footer>
+
+<!-- FLOAT WPP -->
+<a href="https://wa.me/5554992222216" class="float-w" target="_blank">
+  <span class="float-tip">Falar com a Julia</span>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal">
+  <div class="modal-box">
+    <div class="m-close" onclick="closeM()">✕</div>
+    <div class="m-gallery">
+      <img id="m-img" src="" alt="">
+      <div class="m-gall-nav">
+        <div class="g-btn" onclick="pImg(-1)">&#8592;</div>
+        <div class="g-btn" onclick="pImg(1)">&#8594;</div>
+      </div>
+      <div class="m-dots" id="m-dots"></div>
+    </div>
+    <div class="m-body">
+      <div class="m-brand" id="m-brand"></div>
+      <div class="m-title" id="m-title"></div>
+      <div class="m-price" id="m-price"></div>
+      <div class="m-specs" id="m-specs"></div>
+      <div class="m-acess" id="m-acess"></div>
+      <button class="m-wpp" onclick="wppCar()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Tenho Interesse — Falar no WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WPP='5554992222216';
+const VEHICLES=[
+  {vehicle_id:8020401,title:"HONDA CBR 600RR 2011",category:"MOTO",make:"HONDA",model:"CBR 600-RR",year:2011,fabric_year:2011,fuel:"GASOLINA",gear:"Manual",color:"BRANCO",price:"45900.00",valor_fipe:"44856.00",mileage:"0",body_type:null,hp:"0",doors:0,motorization:"599.0",accessories:"",images_large:["https://s3.carro57.com.br/FC/10861/8020401_5_W_6b4b0ac94f.jpeg","https://s3.carro57.com.br/FC/10861/8020401_0_W_5f7abe5163.jpeg","https://s3.carro57.com.br/FC/10861/8020401_5_W_fa322566a4.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_e422a43437.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_28622c7ac3.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_2bc1a8db1b.jpeg"]},
+  {vehicle_id:7808834,title:"FIAT SIENA ESSENCE 1.6 2014",category:"AUTOMÓVEL",make:"FIAT",model:"SIENA ESSENCE 1.6",year:2014,fabric_year:2013,fuel:"FLEX",gear:"Semi-automático",color:"PRETO",price:"39900.00",valor_fipe:0,mileage:"0",body_type:"sedan",hp:"117",doors:5,motorization:"1.6",accessories:"ABS,Airbag,Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve,Som Multimídia,Rádio Bluetooth",images_large:["https://s3.carro57.com.br/FC/10861/7808834_4_W_dede1d0418.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_44fbde5866.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_dc1672da50.jpeg","https://s3.carro57.com.br/FC/10861/7808834_0_W_353afd3d97.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_bee5fba397.jpeg"]},
+  {vehicle_id:7914466,title:"CHEVROLET CRUZE LT NB 2012",category:"AUTOMÓVEL",make:"CHEVROLET",model:"CRUZE LT NB",year:2012,fabric_year:2012,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"53900.00",valor_fipe:"51033.00",mileage:"0",body_type:"sedan",hp:"144",doors:5,motorization:"1.8",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve,Computador de Bordo,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7914466_4_W_edf130ce12.jpeg","https://s3.carro57.com.br/FC/10861/7914466_0_W_3c2caf3fbc.jpeg","https://s3.carro57.com.br/FC/10861/7914466_6_W_e367d69fe3.jpeg","https://s3.carro57.com.br/FC/10861/7914466_0_W_3b31ac833d.jpeg"]},
+  {vehicle_id:8027564,title:"HONDA HR-V EXL CVT 2020",category:"AUTOMÓVEL",make:"HONDA",model:"HR-V EXL CVT",year:2020,fabric_year:2019,fuel:"FLEX",gear:"CVT",color:"CINZA",price:"114900.00",valor_fipe:"108916.00",mileage:"117000",body_type:"suv",hp:"140",doors:4,motorization:"1.8",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,Direção Elétrica,GPS,Piloto Automático,Rádio Bluetooth",images_large:["https://s3.carro57.com.br/FC/10861/8027564_0_W_14bdb2e966.jpeg","https://s3.carro57.com.br/FC/10861/8027564_4_W_cbebcfba61.jpeg","https://s3.carro57.com.br/FC/10861/8027564_5_W_23ad4384f3.jpeg","https://s3.carro57.com.br/FC/10861/8027564_5_W_02e421cbc9.jpeg"]},
+  {vehicle_id:8007075,title:"TOYOTA RAV4 4X2 2019",category:"AUTOMÓVEL",make:"TOYOTA",model:"RAV4 4X2 20L",year:2019,fabric_year:2018,fuel:"GASOLINA",gear:"CVT",color:"BRANCO",price:"129900.00",valor_fipe:"129922.00",mileage:"0",body_type:"suv",hp:"145",doors:5,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,GPS,Teto Solar,Piloto Automático",images_large:["https://s3.carro57.com.br/FC/10861/8007075_1_W_963a4b12a1.jpeg","https://s3.carro57.com.br/FC/10861/8007075_1_W_63d2f2f2b2.jpeg","https://s3.carro57.com.br/FC/10861/8007075_1_W_3b73cb433a.jpeg","https://s3.carro57.com.br/FC/10861/8007075_0_W_f6d2ff68e9.jpeg"]},
+  {vehicle_id:8010559,title:"BMW X2 SDRIVE20I 2019",category:"AUTOMÓVEL",make:"BMW",model:"X2 SDRIVE20I",year:2019,fabric_year:2018,fuel:"GASOLINA",gear:"Automático",color:"PRETO",price:"173900.00",valor_fipe:"163880.00",mileage:"0",body_type:"suv",hp:"192",doors:4,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Teto Solar,Farol de Led,GPS,Turbo",images_large:["https://s3.carro57.com.br/FC/10861/8010559_6_W_69655949dc.jpeg","https://s3.carro57.com.br/FC/10861/8010559_1_W_54ee9c744b.jpeg","https://s3.carro57.com.br/FC/10861/8010559_6_W_b06925ff3f.jpeg","https://s3.carro57.com.br/FC/10861/8010559_1_W_9eb251d888.jpeg"]},
+  {vehicle_id:7445142,title:"SUZUKI GSX-S750 2022",category:"MOTO",make:"SUZUKI",model:"GSX-S750 A",year:2022,fabric_year:2021,fuel:"GASOLINA",gear:"Manual",color:"PRETO",price:"55900.00",valor_fipe:"51030.00",mileage:"7800",body_type:null,hp:"114",doors:0,motorization:"749.0",accessories:"",images_large:["https://s3.carro57.com.br/FC/10861/7445142_0_W_59c3e52a64.jpeg","https://s3.carro57.com.br/FC/10861/7445142_0_W_9029fb7ac0.jpeg","https://s3.carro57.com.br/FC/10861/7445142_1_W_64897b879a.jpeg"]},
+  {vehicle_id:7973922,title:"CHEVROLET CRUZE LTZ NB 2018",category:"AUTOMÓVEL",make:"CHEVROLET",model:"CHEV CRUZE LTZ NB AT",year:2018,fabric_year:2017,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"91900.00",valor_fipe:"86258.00",mileage:"0",body_type:"sedan",hp:"153",doors:4,motorization:"1.4",accessories:"ABS,Airbag,Bancos de Couro,GPS,Turbo,Piloto Automático,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/7973922_0_W_f633dd1bef.jpeg","https://s3.carro57.com.br/FC/10861/7973922_4_W_85faebd912.jpeg","https://s3.carro57.com.br/FC/10861/7973922_2_W_48291f3c06.jpeg"]},
+  {vehicle_id:7869196,title:"VOLKSWAGEN GOL 2015",category:"AUTOMÓVEL",make:"VOLKSWAGEN",model:"GOL TL MB S",year:2015,fabric_year:2014,fuel:"FLEX",gear:"Manual",color:"BRANCO",price:"38900.00",valor_fipe:"36585.00",mileage:"0",body_type:"hatch",hp:"76",doors:5,motorization:"1.0",accessories:"ABS,Airbag,Ar-condicionado,Direção Hidráulica,Trava Elétrica,Vidros Elétricos",images_large:["https://s3.carro57.com.br/FC/10861/7869196_2_W_e848e84bab.jpeg","https://s3.carro57.com.br/FC/10861/7869196_4_W_3d623ee088.jpeg","https://s3.carro57.com.br/FC/10861/7869196_2_W_d6b36705a2.jpeg"]},
+  {vehicle_id:7970323,title:"MITSUBISHI PAJERO TR4 2007",category:"AUTOMÓVEL",make:"MITSUBISHI",model:"PAJERO TR4",year:2007,fabric_year:2007,fuel:"GASOLINA",gear:"Automático",color:"PRETO",price:"47900.00",valor_fipe:"43115.00",mileage:"0",body_type:"suv",hp:"131",doors:5,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Câmbio Automático,Rodas de Liga Leve,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7970323_5_W_cb2c2817a5.jpeg","https://s3.carro57.com.br/FC/10861/7970323_1_W_319b12e7da.jpeg","https://s3.carro57.com.br/FC/10861/7970323_0_W_1737868cfa.jpeg"]},
+  {vehicle_id:6503860,title:"TOYOTA HILUX 2018",category:"AUTOMÓVEL",make:"TOYOTA",model:"HILUX CDSRXA4FD",year:2018,fabric_year:2017,fuel:"DIESEL",gear:"Automático",color:"PRATA",price:"197900.00",valor_fipe:"187401.00",mileage:"0",body_type:"caminhonete",hp:"177",doors:4,motorization:"2.8",accessories:"ABS,Airbag,Bancos de Couro,GPS,Teto Solar,Turbo,Câmera de ré,Farol de Led",images_large:["https://s3.carro57.com.br/FC/10861/6503860_1_W_aa295036a7.jpeg","https://s3.carro57.com.br/FC/10861/6503860_0_W_18094e307d.jpeg","https://s3.carro57.com.br/FC/10861/6503860_0_W_027ab3f58d.jpeg"]},
+  {vehicle_id:7799622,title:"RENAULT SANDERO 2021",category:"AUTOMÓVEL",make:"RENAULT",model:"SANDERO SZE16MT",year:2021,fabric_year:2020,fuel:"FLEX",gear:"Manual",color:"PRATA",price:"62900.00",valor_fipe:"59439.00",mileage:"0",body_type:"hatch",hp:"118",doors:4,motorization:"1.6",accessories:"ABS,Airbag,Ar-condicionado,Rodas de Liga Leve,Sensor de estacionamento",images_large:["https://s3.carro57.com.br/FC/10861/7799622_3_W_ce091c0b35.jpeg","https://s3.carro57.com.br/FC/10861/7799622_3_W_871efb921b.jpeg","https://s3.carro57.com.br/FC/10861/7799622_3_W_a815208c3b.jpeg"]},
+  {vehicle_id:7409059,title:"HONDA CIVIC SPORT CVT 2017",category:"AUTOMÓVEL",make:"HONDA",model:"CIVIC SPORT CVT",year:2017,fabric_year:2016,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"102900.00",valor_fipe:"99204.00",mileage:"120000",body_type:"sedan",hp:"155",doors:4,motorization:"2.0",accessories:"ABS,Airbag,GPS,Farol de Led,Câmera de ré,Piloto Automático",images_large:["https://s3.carro57.com.br/FC/10861/7409059_0_W_7b9504d56e.jpeg","https://s3.carro57.com.br/FC/10861/7409059_3_W_0f9bd598ec.jpeg","https://s3.carro57.com.br/FC/10861/7409059_1_W_818e220320.jpeg"]},
+  {vehicle_id:7591422,title:"CITROEN C3 AIRCROSS 2012",category:"AUTOMÓVEL",make:"CITROEN",model:"C3 AIRCROSS GLXA",year:2012,fabric_year:2011,fuel:"FLEX",gear:"Automático",color:"PRATA",price:"39900.00",valor_fipe:"30445.00",mileage:"92000",body_type:"suv",hp:"113",doors:5,motorization:"1.6",accessories:"Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7591422_2_W_2477fd6e90.jpeg","https://s3.carro57.com.br/FC/10861/7591422_7_W_c16d990ecb.jpeg","https://s3.carro57.com.br/FC/10861/7591422_1_W_0984cc76e0.jpeg"]},
+  {vehicle_id:7813728,title:"CHEVROLET MERIVA PREMIUM 2011",category:"AUTOMÓVEL",make:"CHEVROLET",model:"MERIVA PREMIUM",year:2011,fabric_year:2010,fuel:"FLEX",gear:"Semi-automático",color:"PRETO",price:"27900.00",valor_fipe:"30168.00",mileage:"0",body_type:null,hp:"114",doors:5,motorization:"1.8",accessories:"Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7813728_6_W_108b961ebb.jpeg","https://s3.carro57.com.br/FC/10861/7813728_2_W_664652fc72.jpeg","https://s3.carro57.com.br/FC/10861/7813728_3_W_35291edbe2.jpeg"]},
+  {vehicle_id:8019098,title:"FORD FOCUS SE 1.6 2017",category:"AUTOMÓVEL",make:"FORD",model:"FOCUS SE 1.6 HC",year:2017,fabric_year:2017,fuel:"FLEX",gear:"Manual",color:"CINZA",price:"72900.00",valor_fipe:0,mileage:"0",body_type:"hatch",hp:"135",doors:4,motorization:"1.6",accessories:"ABS,Airbag,Bancos de Couro,GPS,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/8019098_5_W_c8110edea7.jpeg","https://s3.carro57.com.br/FC/10861/8019098_5_W_1b6f31d8e4.jpeg","https://s3.carro57.com.br/FC/10861/8019098_1_W_cf9ec19eaf.jpeg"]},
+  {vehicle_id:8011266,title:"JEEP COMPASS SPORT 2022",category:"AUTOMÓVEL",make:"JEEP",model:"COMPASS SPORT TF",year:2022,fabric_year:2021,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"0.00",valor_fipe:"108897.00",mileage:"0",body_type:"suv",hp:"185",doors:4,motorization:"1.3",accessories:"ABS,Airbag,Bancos de Couro,GPS,Farol de Led,Turbo,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/8011266_4_W_9f1120f017.jpeg","https://s3.carro57.com.br/FC/10861/8011266_3_W_e16e8a7c98.jpeg","https://s3.carro57.com.br/FC/10861/8011266_4_W_0e7145635d.jpeg"]},
+  {vehicle_id:7757483,title:"JEEP RENEGADE LNGTD 2016",category:"AUTOMÓVEL",make:"JEEP",model:"RENEGADE LNGTD AT",year:2016,fabric_year:2015,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"75900.00",valor_fipe:"66372.00",mileage:"0",body_type:"suv",hp:"132",doors:4,motorization:"1.8",accessories:"ABS,Airbag,Teto Solar,GPS,Câmera de ré,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7757483_1_W_9222bece10.jpeg","https://s3.carro57.com.br/FC/10861/7757483_5_W_c96a4bd143.jpeg","https://s3.carro57.com.br/FC/10861/7757483_5_W_382ed9a1d7.jpeg"]},
+  {vehicle_id:7913290,title:"TOYOTA YARIS HB 2019",category:"AUTOMÓVEL",make:"TOYOTA",model:"YARIS HB XLPLUSAT",year:2019,fabric_year:2019,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"79900.00",valor_fipe:"75201.00",mileage:"0",body_type:"hatch",hp:"101",doors:4,motorization:"1.3",accessories:"ABS,Airbag,Ar-condicionado,GPS,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/7913290_4_W_ea6524901c.jpeg","https://s3.carro57.com.br/FC/10861/7913290_2_W_73bf15b1ab.jpeg","https://s3.carro57.com.br/FC/10861/7913290_4_W_113d363fc6.jpeg"]},
+  {vehicle_id:7937030,title:"VOLKSWAGEN GOLF 1.6 2009",category:"AUTOMÓVEL",make:"VOLKSWAGEN",model:"GOLF 1.6 SPORTLINE",year:2009,fabric_year:2008,fuel:"FLEX",gear:"Manual",color:"PRATA",price:"44900.00",valor_fipe:"43166.00",mileage:"0",body_type:"hatch",hp:"104",doors:5,motorization:"1.6",accessories:"ABS,Airbag,Bancos de Couro,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7937030_6_W_8caf561276.jpeg","https://s3.carro57.com.br/FC/10861/7937030_3_W_ac70ef8c65.jpeg","https://s3.carro57.com.br/FC/10861/7937030_3_W_c8a98c7bfe.jpeg"]}
+];
+
+// LOADER
+let lp=0;
+const lb=document.getElementById('lb');
+const lti=setInterval(()=>{
+  lp+=2;lb.style.width=lp+'%';
+  if(lp>=100){clearInterval(lti);setTimeout(()=>{document.getElementById('loader').classList.add('done');initSite();},400);}
+},25);
+
+function initSite(){
+  // nav scroll
+  window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+  // hero stat
+  const hs=document.getElementById('hs1');
+  if(hs)hs.textContent=VEHICLES.length+'+';
+  document.getElementById('scount').textContent=VEHICLES.length;
+  // reveals
+  const obs=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:0.12});
+  document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+  // horizontal init
+  goP(0);
+  // stock (show 8 featured)
+  renderStockPreview(VEHICLES.slice(0,8));
+  // populateFilters not needed on homepage
+  // instagram
+  buildInsta();
+  // touch for horizontal
+  let tx=0;
+  document.getElementById('h-section').addEventListener('touchstart',e=>tx=e.touches[0].clientX);
+  document.getElementById('h-section').addEventListener('touchend',e=>{const d=tx-e.changedTouches[0].clientX;if(Math.abs(d)>50)chP(d>0?1:-1);});
+}
+
+// PARALLAX HERO
+window.addEventListener('scroll',()=>{
+  const bg=document.querySelector('.hero-bg');
+  if(bg){const y=window.scrollY;bg.style.transform=`scale(1.1) translateY(${y*0.3}px)`;}
+});
+
+// SECTION ENTRANCE OBSERVER
+const secObs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.sec-enter,.sec-enter-left,.sec-enter-right').forEach(el=>secObs.observe(el));
+
+// HORIZONTAL
+let cp=0,tp=3;
+function goP(i){
+  cp=Math.max(0,Math.min(tp-1,i));
+  document.getElementById('h-track').style.transform=`translateX(-${cp*100}vw)`;
+  document.querySelectorAll('.h-dot').forEach((d,j)=>d.classList.toggle('on',j===cp));
+  setTimeout(()=>{
+    document.querySelectorAll('#h-track .rev').forEach(el=>{
+      const slide=el.closest('.h-slide');
+      if(slide){const idx=[...document.querySelectorAll('.h-slide')].indexOf(slide);if(idx===cp)el.classList.add('on');}});
+    if(cp===0)animNums();
+  },100);
+}
+function chP(d){goP(cp+d);}
+function animNums(){
+  document.querySelectorAll('[data-c]').forEach(el=>{
+    const t=parseInt(el.dataset.c);let c=0;
+    const suf=t===98?'%':'+';
+    const inc=t/60;
+    const ti=setInterval(()=>{c=Math.min(c+inc,t);el.textContent=Math.floor(c)+suf;if(c>=t)clearInterval(ti);},20);
+  });
+}
+setTimeout(()=>document.querySelectorAll('#h-track .h-slide:first-child .rev').forEach(el=>el.classList.add('on')),200);
+
+// FILTERS
+function detectCat(v){
+  if(v.category==='MOTO')return'moto';
+  const b=(v.body_type||'').toLowerCase();
+  const m=(v.model||v.title||'').toLowerCase();
+  if(b==='hatch'||m.includes('gol')||m.includes('polo')||m.includes('hb20')||m.includes('onix')||m.includes('kwid')||m.includes('argo')||m.includes('yaris')||m.includes('golf')||m.includes('focus')||m.includes('sandero'))return'hatch';
+  if(b==='sedan'||m.includes('civic')||m.includes('corolla')||m.includes('jetta')||m.includes('cruze')||m.includes('siena'))return'sedan';
+  if(b==='suv'||m.includes('hrv')||m.includes('compass')||m.includes('renegade')||m.includes('creta')||m.includes('tracker')||m.includes('rav4')||m.includes('x2')||m.includes('pajero')||m.includes('aircross'))return'suv';
+  if(b==='caminhonete'||m.includes('hilux')||m.includes('ranger')||m.includes('s10')||m.includes('saveiro')||m.includes('strada'))return'picape';
+  return'outros';
+}
+function populateFilters(vs){
+  const marcas=[...new Set(vs.map(v=>v.make).filter(Boolean))].sort();
+  const anos=[...new Set(vs.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a);
+  const ms=document.getElementById('fmarca'),as=document.getElementById('fano');
+  marcas.forEach(m=>ms.innerHTML+=`<option value="${m}">${m}</option>`);
+  anos.forEach(a=>as.innerHTML+=`<option value="${a}">${a}</option>`);
+}
+function applyF(){
+  const s=document.getElementById('fs').value.toLowerCase();
+  const cat=document.getElementById('fcat').value;
+  const marca=document.getElementById('fmarca').value;
+  const ano=document.getElementById('fano').value;
+  const pr=document.getElementById('fpreco').value;
+  let f=VEHICLES.filter(v=>{
+    const full=((v.make||'')+(v.model||v.title||'')).toLowerCase();
+    if(s&&!full.includes(s))return false;
+    if(cat&&detectCat(v)!==cat)return false;
+    if(marca&&v.make!==marca)return false;
+    if(ano&&String(v.year)!==ano)return false;
+    if(pr){const[min,max]=pr.split('-').map(Number);const p=parseFloat(v.price||0);if(p<min||p>max)return false;}
+    return true;
+  });
+  renderStock(f);
+}
+function resetF(){
+  ['fs','fcat','fmarca','fano','fpreco'].forEach(id=>document.getElementById(id).value='');
+  renderStock(VEHICLES);
+}
+// filters only active on estoque page
+if(document.getElementById('fs')){
+['fs','fcat','fmarca','fano','fpreco'].forEach(id=>{
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.addEventListener('change',applyF);
+  if(id==='fs')el.addEventListener('input',applyF);
+});}
+
+// RENDER STOCK PREVIEW (homepage - 8 max)
+function renderStockPreview(vs){
+  const g=document.getElementById('s-grid');
+  if(!vs.length){g.innerHTML='<div class="no-res">Nenhum veículo encontrado.</div>';return;}
+  g.innerHTML=vs.map(v=>{
+    const img=(v.images_large&&v.images_large[0])||'';
+    const p=parseFloat(v.price),fipe=parseFloat(v.valor_fipe);
+    const isFipe=p>0&&fipe>0&&p<fipe;
+    const pFmt=p>0?'R$ '+p.toLocaleString('pt-BR'):'Consultar';
+    const ano=v.fabric_year&&v.year&&String(v.fabric_year)!==String(v.year)?`${v.fabric_year}/${v.year}`:String(v.year||v.fabric_year||'');
+    const km=parseFloat(v.mileage||0);
+    const kmFmt=km>0?km.toLocaleString('pt-BR')+' km':'—';
+    const cat=detectCat(v).toUpperCase();
+    return`<div class="v-card" onclick="openM(${v.vehicle_id})">
+      <div class="v-img">
+        ${img?`<img src="${img}" alt="${v.model}" loading="lazy">`:'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#333">🚗</div>'}
+        ${isFipe?'<div class="v-fipe">⭐ ABAIXO DA FIPE</div>':''}
+        <div class="v-cat">${cat}</div>
+      </div>
+      <div class="v-info">
+        <div class="v-brand">${v.make||''}</div>
+        <div class="v-name">${(v.model||v.title||'').toUpperCase()}</div>
+        <div class="v-meta">${ano} · ${kmFmt} · ${v.color||''}</div>
+        <div class="v-price-row">
+          <div class="v-price">${pFmt}</div>
+          <button class="v-btn">Ver →</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// MODAL
+let curV=null,curImg=0,imgs=[];
+function openM(id){
+  const v=VEHICLES.find(x=>x.vehicle_id===id);if(!v)return;
+  curV=v;imgs=v.images_large||[];curImg=0;
+  document.getElementById('m-brand').textContent=v.make||'';
+  document.getElementById('m-title').textContent=((v.model||v.title||'').toUpperCase());
+  const p=parseFloat(v.price);
+  document.getElementById('m-price').textContent=p>0?'R$ '+p.toLocaleString('pt-BR'):'Consultar preço';
+  document.getElementById('m-img').src=imgs[0]||'';
+  const ano=v.fabric_year&&v.year&&String(v.fabric_year)!==String(v.year)?`${v.fabric_year}/${v.year}`:String(v.year||'');
+  const km=parseFloat(v.mileage||0);
+  document.getElementById('m-specs').innerHTML=[
+    {l:'Ano',v:ano},{l:'KM',v:km>0?km.toLocaleString('pt-BR')+' km':'—'},
+    {l:'Cor',v:v.color||'—'},{l:'Câmbio',v:v.gear||'—'},
+    {l:'Combustível',v:v.fuel||'—'},{l:'Motor',v:v.motorization?v.motorization+' L':'—'},
+  ].map(s=>`<div><div class="ms-lbl">${s.l}</div><div class="ms-val">${s.v}</div></div>`).join('');
+  const acs=(v.accessories||'').split(',').filter(a=>a.trim());
+  document.getElementById('m-acess').innerHTML=acs.length?`<div class="m-acess-title">Acessórios</div><div class="m-acess-tags">${acs.map(a=>`<span class="m-tag">${a.trim()}</span>`).join('')}</div>`:'';
+  document.getElementById('m-dots').innerHTML=imgs.map((_,i)=>`<div class="m-dot${i===0?' on':''}" onclick="setImg(${i})"></div>`).join('');
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeM(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+function setImg(i){curImg=i;document.getElementById('m-img').src=imgs[i]||'';document.querySelectorAll('.m-dot').forEach((d,j)=>d.classList.toggle('on',j===i));}
+function pImg(d){setImg((curImg+d+imgs.length)%imgs.length);}
+function wppCar(){
+  if(!curV)return;
+  const model=(curV.make||'')+' '+(curV.model||curV.title||'');
+  const msg=encodeURIComponent(`Olá! Tenho interesse no veículo:\n🚗 *${model} ${curV.year}*\n\nGostaria de mais informações e condições de pagamento.`);
+  window.open(`https://wa.me/${WPP}?text=${msg}`,'_blank');
+}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeM();});
+
+// INSTAGRAM REELS — 4 fotos estilo vertical
+function buildInsta(){
+  const grid=document.getElementById('reels-grid');
+  if(!grid)return;
+  const picks=VEHICLES.filter(v=>v.images_large&&v.images_large.length>0).slice(0,4);
+  const captions=['Estoque Premium','Procedência Garantida','Sem Leilão ou Sinistro','Financiamento Fácil'];
+  picks.forEach((v,i)=>{
+    const img=v.images_large[1]||v.images_large[0];
+    const name=(v.make||'')+' '+(v.model||'');
+    grid.innerHTML+=`<div class="reel-item" onclick="window.open('https://www.instagram.com/jotacar_rs/','_blank')">
+      <img src="${img}" alt="${name}" loading="lazy">
+      <div class="reel-overlay">
+        <div class="reel-top"><div class="reel-play">▶</div></div>
+        <div class="reel-bottom">
+          <div class="reel-logo">JOTA<span>CAR</span></div>
+          <div class="reel-caption">${captions[i]||name}</div>
+        </div>
+      </div>
+    </div>`;
+  });
+}
+
+// FINANCIAMENTO
+function submitFin(e){
+  e.preventDefault();
+  const msg=`📋 *SIMULAÇÃO — JOTACAR*\n\n👤 Nome: ${document.getElementById('fn').value}\n📞 Tel: ${document.getElementById('ft').value}\n🪪 CPF: ${document.getElementById('fcpf').value||'N/I'}\n🎂 Nasc: ${document.getElementById('fn2').value||'N/I'}\n\n🚗 Veículo: ${document.getElementById('fv').value||'A definir'}\n💰 Entrada: ${document.getElementById('fe').value||'A definir'}\n💼 Renda: ${document.getElementById('fr').value||'N/I'}\n🔄 Troca: ${document.getElementById('ftr').value}\n📝 Obs: ${document.getElementById('fo').value||'—'}`;
+  window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+</script>
+</body>
+</html>
