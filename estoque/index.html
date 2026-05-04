@@ -1,156 +1,547 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Estoque Completo — Jotacar Seminovos</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root{--black:#050505;--dark:#0d0d0d;--dark2:#151515;--dark3:#1e1e1e;--gray:#2c2c2c;--gold:#C9A84C;--gold2:#E8C96A;--white:#F5F0E8;--muted:#666;--font-display:'Bebas Neue',sans-serif;--font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--black);color:var(--white);font-family:var(--font-body);}
-::-webkit-scrollbar{width:3px;};::-webkit-scrollbar-thumb{background:var(--gold);}
-nav{position:sticky;top:0;z-index:100;background:rgba(5,5,5,0.97);padding:1rem 4rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(201,168,76,0.1);backdrop-filter:blur(10px);}
-.nav-logo{font-family:var(--font-display);font-size:1.5rem;letter-spacing:0.15em;color:var(--white);text-decoration:none;}
-.nav-logo span{color:var(--gold);}
-.nav-back{font-family:var(--font-head);font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(201,168,76,0.3);padding:0.5rem 1.2rem;transition:all 0.2s;}
-.nav-back:hover{background:rgba(201,168,76,0.1);}
-.page-head{padding:5rem 4rem 3rem;}
-.page-tag{font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.75rem;}
-.page-title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);letter-spacing:0.03em;}
-.page-title span{color:var(--gold);}
-.page-count{font-family:var(--font-head);font-size:0.8rem;color:var(--muted);margin-top:0.5rem;}
-.filters{display:flex;align-items:center;gap:0.75rem;padding:0 4rem 2.5rem;flex-wrap:wrap;}
-.f-input{flex:1;min-width:180px;background:var(--dark2);border:none;border-bottom:2px solid var(--gray);color:var(--white);padding:0.8rem 0.5rem;font-family:var(--font-body);font-size:0.85rem;outline:none;transition:border-color 0.2s;}
-.f-input:focus{border-color:var(--gold);}
-.f-sel{background:var(--dark2);border:none;border-bottom:2px solid var(--gray);color:var(--white);padding:0.8rem 0.5rem;font-family:var(--font-body);font-size:0.85rem;outline:none;cursor:pointer;min-width:130px;transition:border-color 0.2s;}
-.f-sel:focus{border-color:var(--gold);}
-.f-reset{background:transparent;border:1px solid rgba(201,168,76,0.25);color:var(--gold);padding:0.8rem 1.2rem;font-family:var(--font-head);font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-.f-reset:hover{background:rgba(201,168,76,0.08);}
-#s-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:rgba(201,168,76,0.05);padding:0 4rem 6rem;}
-.v-card{background:var(--dark);cursor:pointer;overflow:hidden;transition:all 0.3s;}
-.v-card:hover{background:var(--dark2);}
-.v-img{height:200px;overflow:hidden;background:var(--dark3);position:relative;}
-.v-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s,filter 0.3s;filter:brightness(0.85);}
-.v-card:hover .v-img img{transform:scale(1.07);filter:brightness(1);}
-.v-fipe{position:absolute;top:0.75rem;left:0.75rem;background:var(--gold);color:var(--black);font-family:var(--font-head);font-size:0.6rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:0.2rem 0.5rem;}
-.v-cat{position:absolute;top:0.75rem;right:0.75rem;background:rgba(0,0,0,0.75);border:1px solid rgba(201,168,76,0.2);color:rgba(245,240,232,0.7);font-family:var(--font-head);font-size:0.6rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:0.2rem 0.5rem;}
-.v-info{padding:1.25rem 1.5rem 1.5rem;}
-.v-brand{font-family:var(--font-head);font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.2rem;}
-.v-name{font-family:var(--font-head);font-size:0.95rem;font-weight:700;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:0.4rem;line-height:1.2;}
-.v-meta{font-size:0.78rem;color:var(--muted);margin-bottom:1rem;}
-.v-price-row{display:flex;align-items:flex-end;justify-content:space-between;}
-.v-price{font-family:var(--font-display);font-size:1.5rem;color:var(--gold);line-height:1;}
-.v-btn{background:transparent;border:1px solid rgba(201,168,76,0.3);color:var(--gold);padding:0.5rem 1rem;font-family:var(--font-head);font-size:0.7rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
-.v-card:hover .v-btn{background:var(--gold);color:var(--black);}
-.no-res{grid-column:1/-1;text-align:center;padding:4rem;color:var(--muted);font-family:var(--font-head);font-size:0.85rem;letter-spacing:0.1em;}
-/* MODAL */
-.modal-bg{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;padding:2rem;}
-.modal-bg.open{display:flex;}
-.modal-box{background:var(--dark);width:100%;max-width:920px;max-height:90vh;overflow-y:auto;position:relative;border:1px solid rgba(201,168,76,0.1);}
-.m-close{position:absolute;top:1rem;right:1rem;z-index:5;width:36px;height:36px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);color:var(--gold);font-size:1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;}
-.m-close:hover{background:var(--gold);color:var(--black);}
-.m-gallery{height:380px;background:var(--dark3);position:relative;overflow:hidden;}
-.m-gallery img{width:100%;height:100%;object-fit:cover;}
-.m-gall-nav{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 1rem;}
-.g-btn{width:40px;height:40px;background:rgba(0,0,0,0.7);border:1px solid rgba(201,168,76,0.3);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;font-size:1rem;}
-.g-btn:hover{background:var(--gold);color:var(--black);}
-.m-dots{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:0.4rem;}
-.m-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.3);cursor:pointer;}
-.m-dot.on{background:var(--gold);}
-.m-body{padding:2rem 2.5rem;}
-.m-brand{font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;}
-.m-title{font-family:var(--font-display);font-size:1.8rem;letter-spacing:0.03em;margin-bottom:0.5rem;}
-.m-price{font-family:var(--font-display);font-size:2.2rem;color:var(--gold);margin-bottom:2rem;line-height:1;}
-.m-specs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem;border-top:1px solid var(--gray);border-bottom:1px solid var(--gray);padding:1.5rem 0;}
-.ms-lbl{font-family:var(--font-head);font-size:0.65rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
-.ms-val{font-family:var(--font-head);font-size:0.9rem;font-weight:600;}
-.m-acess-title{font-family:var(--font-head);font-size:0.7rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;}
-.m-acess-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:2rem;}
-.m-tag{background:var(--dark3);border:1px solid var(--gray);padding:0.25rem 0.6rem;font-size:0.72rem;color:rgba(245,240,232,0.6);}
-.m-wpp{width:100%;background:#25D366;color:#fff;border:none;padding:1.1rem;font-family:var(--font-head);font-size:0.9rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:0.75rem;}
-.m-wpp:hover{background:#1fba57;}
-.float-w{position:fixed;bottom:2rem;right:2rem;z-index:999;background:#25D366;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,0.35);text-decoration:none;transition:all 0.3s;}
-.float-w:hover{transform:scale(1.1);}
-.float-w svg{width:26px;height:26px;fill:white;}
-@media(max-width:768px){nav{padding:1rem 1.5rem;}.page-head{padding:3rem 1.5rem 2rem;}.filters{padding:0 1.5rem 2rem;}#s-grid{padding:0 0 4rem;grid-template-columns:1fr 1fr;}}
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Estoque — Implacável Automóveis</title>
+  <meta name="description" content="Veja todo o estoque de seminovos da Implacável Automóveis. Nova Iguaçu - RJ. Garantia 2 anos para veículos 2016+. Financiamento facilitado.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #1E6FFF;
+      --blue-dark: #1553D4;
+      --blue-glow: rgba(30,111,255,0.3);
+      --black: #08090A;
+      --black-2: #14161A;
+      --black-3: #1E2128;
+      --black-4: #282D36;
+      --white: #F0F2F5;
+      --white-dim: rgba(240,242,245,0.6);
+      --white-faint: rgba(240,242,245,0.07);
+      --border: rgba(240,242,245,0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+    /* ── LOADER ── */
+    #loader { position: fixed; inset: 0; z-index: 9999; background: var(--black); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 32px; transition: opacity 0.5s, visibility 0.5s; }
+    #loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-logo { width: 140px; animation: pulse 1.2s ease-in-out infinite; }
+    .loader-bar-wrap { width: 200px; height: 2px; background: var(--black-4); overflow: hidden; }
+    .loader-bar { height: 100%; width: 0%; background: var(--blue); animation: loadbar 1.2s ease forwards; box-shadow: 0 0 10px var(--blue-glow); }
+    .loader-text { font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 4px; color: var(--white-dim); text-transform: uppercase; }
+    @keyframes loadbar { to { width: 100%; } }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0 48px; height: 72px; display: flex; align-items: center; justify-content: space-between; background: rgba(8,9,10,0.97); border-bottom: 1px solid var(--border); backdrop-filter: blur(12px); }
+    .nav-logo { height: 36px; }
+    .nav-links { display: flex; align-items: center; gap: 40px; list-style: none; }
+    .nav-links a { color: var(--white-dim); text-decoration: none; font-family: 'Barlow Condensed'; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--white); }
+    .nav-cta { background: var(--blue) !important; color: #fff !important; padding: 10px 24px; border-radius: 2px; font-weight: 700 !important; }
+    .nav-cta:hover { background: var(--blue-dark) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    /* ── PAGE HEADER ── */
+    .page-header { padding: 120px 48px 60px; background: var(--black-2); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .page-header::after { content: 'ESTOQUE'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Bebas Neue'; font-size: 200px; color: rgba(240,242,245,0.03); line-height: 1; pointer-events: none; }
+    .page-header-inner { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .page-label { font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .page-title { font-family: 'Bebas Neue'; font-size: clamp(40px, 6vw, 72px); letter-spacing: 1px; line-height: 1; }
+    .page-count { font-family: 'Barlow Condensed'; font-size: 14px; letter-spacing: 2px; color: var(--white-dim); text-transform: uppercase; }
+    .page-count span { color: var(--blue); font-weight: 700; }
+
+    /* ── FILTERS ── */
+    .filters-bar { background: var(--black-3); border-bottom: 1px solid var(--border); padding: 20px 48px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .filter-group { display: flex; flex-direction: column; gap: 4px; min-width: 160px; }
+    .filter-label { font-family: 'Barlow Condensed'; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--white-dim); }
+    .filter-select { background: var(--black-4); border: 1px solid var(--border); color: var(--white); padding: 10px 14px; border-radius: 2px; font-family: 'Barlow Condensed'; font-size: 14px; cursor: pointer; outline: none; transition: border-color 0.2s; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23999' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+    .filter-select:focus { border-color: var(--blue); }
+    .filter-search { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 4px; }
+    .filter-input { background: var(--black-4); border: 1px solid var(--border); color: var(--white); padding: 10px 14px; border-radius: 2px; font-family: 'Barlow'; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .filter-input:focus { border-color: var(--blue); }
+    .filter-input::placeholder { color: var(--white-dim); }
+    .filter-reset { background: none; border: 1px solid var(--border); color: var(--white-dim); cursor: pointer; padding: 10px 20px; border-radius: 2px; font-family: 'Barlow Condensed'; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s, border-color 0.2s; align-self: flex-end; }
+    .filter-reset:hover { color: var(--white); border-color: var(--white-dim); }
+
+    /* ── SORT BAR ── */
+    .sort-bar { padding: 16px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .sort-info { font-size: 14px; color: var(--white-dim); }
+    .sort-info strong { color: var(--white); }
+    .sort-group { display: flex; gap: 8px; align-items: center; }
+    .sort-label { font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--white-dim); }
+    .sort-btn { background: none; border: 1px solid var(--border); color: var(--white-dim); cursor: pointer; padding: 6px 14px; border-radius: 2px; font-family: 'Barlow Condensed'; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
+    .sort-btn:hover, .sort-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+    /* ── GRID ── */
+    .estoque-wrap { padding: 24px 48px 80px; }
+    .estoque-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px; }
+
+    /* ── CARD ── */
+    .card { background: var(--black-2); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; animation: fadeIn 0.4s ease both; cursor: pointer; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(0,0,0,.6); border-color: rgba(30,111,255,0.28); }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    .card-img-wrap { position: relative; overflow: hidden; aspect-ratio: 16/10; }
+    .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .card:hover .card-img { transform: scale(1.05); }
+    .card-badge { position: absolute; top: 12px; left: 12px; background: var(--blue); color: #fff; font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 2px; }
+    .card-km { position: absolute; bottom: 12px; right: 12px; background: rgba(8,9,10,0.85); backdrop-filter: blur(4px); color: var(--white-dim); font-family: 'Barlow Condensed'; font-size: 12px; padding: 4px 10px; border-radius: 2px; }
+    .card-zoom-hint { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(30,111,255,0); transition: background 0.3s; }
+    .card:hover .card-zoom-hint { background: rgba(30,111,255,0.08); }
+    .card-zoom-icon { width: 44px; height: 44px; background: rgba(30,111,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.6); transition: opacity 0.3s, transform 0.3s; }
+    .card:hover .card-zoom-icon { opacity: 1; transform: scale(1); }
+    .card-body { padding: 18px 20px; }
+    .card-brand { font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); }
+    .card-model { font-family: 'Bebas Neue'; font-size: 24px; line-height: 1.1; margin-top: 4px; }
+    .card-versao { font-size: 12px; font-weight: 300; color: var(--white-dim); margin-top: 4px; }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+    .card-tag { background: var(--black-4); border: 1px solid var(--border); padding: 4px 10px; border-radius: 2px; font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--white-dim); }
+    .card-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .card-price { font-family: 'Bebas Neue'; font-size: 20px; letter-spacing: 1px; }
+    .card-wpp { display: inline-flex; align-items: center; gap: 6px; background: #128C7E; color: #fff; padding: 8px 16px; border-radius: 2px; font-family: 'Barlow Condensed'; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+    .card-wpp:hover { background: #075E54; }
+
+    /* ── SKELETONS ── */
+    .card-skeleton { background: var(--black-2); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .skeleton-img { aspect-ratio: 16/10; background: var(--black-4); }
+    .skeleton-body { padding: 18px 20px; }
+    .skeleton-line { height: 14px; background: var(--black-4); border-radius: 2px; margin-bottom: 10px; animation: shimmer 1.5s infinite; }
+    .skeleton-line.w60 { width: 60%; } .skeleton-line.w80 { width: 80%; }
+    @keyframes shimmer { 0%,100%{opacity:0.4}50%{opacity:0.8} }
+
+    /* ── EMPTY STATE ── */
+    .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 20px; }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .empty-title { font-family: 'Bebas Neue'; font-size: 32px; margin-bottom: 8px; }
+    .empty-text { font-size: 15px; font-weight: 300; color: var(--white-dim); margin-bottom: 24px; }
+
+    /* ── LOAD MORE ── */
+    .load-more-wrap { text-align: center; padding: 32px 0 0; }
+    .load-more-btn { background: none; border: 1px solid var(--border); color: var(--white); cursor: pointer; padding: 14px 40px; border-radius: 2px; font-family: 'Barlow Condensed'; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; transition: all 0.2s; }
+    .load-more-btn:hover { background: var(--blue); border-color: var(--blue); }
+
+    /* ══ MODAL ══ */
+    .modal-overlay { position: fixed; inset: 0; z-index: 5000; background: rgba(0,0,0,0.92); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+    .modal-overlay.open { opacity: 1; visibility: visible; }
+    .modal-container { background: var(--black-2); border: 1px solid rgba(240,242,245,0.1); border-radius: 6px; width: 100%; max-width: 980px; max-height: 92vh; display: flex; overflow: hidden; position: relative; transform: translateY(24px) scale(0.97); transition: transform 0.35s cubic-bezier(.22,.68,0,1.2); box-shadow: 0 32px 80px rgba(0,0,0,0.8); }
+    .modal-overlay.open .modal-container { transform: translateY(0) scale(1); }
+    .modal-close { position: absolute; top: 14px; right: 14px; z-index: 20; background: rgba(0,0,0,0.55); border: 1px solid rgba(255,255,255,0.15); color: #fff; width: 36px; height: 36px; border-radius: 50%; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
+    .modal-close:hover { background: var(--blue); }
+    .modal-gallery { width: 55%; flex-shrink: 0; display: flex; flex-direction: column; background: #0a0c0e; position: relative; }
+    .modal-main-photo { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; background: #08090a; overflow: hidden; min-height: 280px; }
+    .modal-main-img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.18s ease; }
+    .modal-main-img.fading { opacity: 0; }
+    .modal-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.15); color: #fff; width: 40px; height: 40px; border-radius: 50%; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.2s; z-index: 3; line-height: 1; }
+    .modal-nav:hover { background: var(--blue); transform: translateY(-50%) scale(1.08); }
+    .modal-nav.prev { left: 12px; } .modal-nav.next { right: 12px; }
+    .modal-photo-counter { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.72); color: rgba(255,255,255,0.75); font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 2px; padding: 3px 14px; border-radius: 20px; white-space: nowrap; }
+    .modal-thumbs { display: flex; gap: 4px; padding: 8px; overflow-x: auto; flex-shrink: 0; background: #111; min-height: 72px; align-items: center; }
+    .modal-thumbs::-webkit-scrollbar { height: 3px; }
+    .modal-thumbs::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 2px; }
+    .modal-thumb { flex-shrink: 0; width: 76px; height: 56px; border-radius: 3px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s, opacity 0.2s, transform 0.2s; opacity: 0.5; }
+    .modal-thumb:hover { opacity: 0.85; transform: scale(1.04); }
+    .modal-thumb.active { border-color: var(--blue); opacity: 1; }
+    .modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .modal-info { flex: 1; padding: 28px 28px 24px; display: flex; flex-direction: column; overflow-y: auto; }
+    .modal-info::-webkit-scrollbar { width: 3px; }
+    .modal-info::-webkit-scrollbar-thumb { background: var(--blue); }
+    .modal-ano-badge { display: inline-block; background: var(--blue); color: #fff; font-family: 'Barlow Condensed'; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 3px 12px; border-radius: 2px; margin-bottom: 10px; width: fit-content; }
+    .modal-brand-el { font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); font-weight: 700; }
+    .modal-model-el { font-family: 'Bebas Neue'; font-size: 38px; line-height: 1; margin-top: 2px; }
+    .modal-versao-el { font-size: 12px; font-weight: 300; color: var(--white-dim); margin-top: 4px; line-height: 1.5; }
+    .modal-divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+    .modal-specs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .modal-spec { display: flex; flex-direction: column; gap: 2px; background: var(--black-3); border: 1px solid var(--border); border-radius: 3px; padding: 10px 14px; }
+    .modal-spec-label { font-family: 'Barlow Condensed'; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--white-dim); }
+    .modal-spec-val { font-family: 'Barlow Condensed'; font-size: 16px; font-weight: 700; color: var(--white); letter-spacing: 0.5px; }
+    .modal-price-block { margin-top: 18px; }
+    .modal-price-label { font-family: 'Barlow Condensed'; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--white-dim); }
+    .modal-price-val { font-family: 'Bebas Neue'; font-size: 44px; line-height: 1; color: var(--white); margin-top: 2px; }
+    .modal-actions { margin-top: auto; padding-top: 18px; }
+    .modal-wpp-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #128C7E; color: #fff; padding: 16px 24px; border-radius: 3px; font-family: 'Barlow Condensed'; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; width: 100%; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 16px rgba(18,140,126,0.25); }
+    .modal-wpp-btn:hover { background: #075E54; transform: translateY(-2px); }
+    .modal-codigo { margin-top: 10px; text-align: center; font-family: 'Barlow Condensed'; font-size: 11px; letter-spacing: 2px; color: rgba(240,242,245,0.3); text-transform: uppercase; }
+
+    /* ── WPP FLOAT ── */
+    .wpp-float { position: fixed; bottom: 28px; right: 28px; z-index: 999; width: 58px; height: 58px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; transition: transform 0.2s; }
+    .wpp-float:hover { transform: scale(1.1); }
+    .wpp-float svg { width: 26px; height: 26px; fill: #fff; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--black); border-top: 1px solid var(--border); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-copy { font-size: 12px; color: var(--white-dim); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--white-dim); text-decoration: none; font-family: 'Barlow Condensed'; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; inset: 72px 0 0 0; background: rgba(8,9,10,0.98); padding: 32px 24px; gap: 20px; align-items: flex-start; }
+      .nav-hamburger { display: flex; }
+      .page-header { padding: 100px 24px 40px; }
+      .filters-bar { padding: 16px 24px; }
+      .sort-bar { padding: 12px 24px; }
+      .estoque-wrap { padding: 16px 24px 60px; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 700px) {
+      .modal-container { flex-direction: column; max-height: 96vh; border-radius: 8px 8px 0 0; align-self: flex-end; margin-bottom: 0; }
+      .modal-gallery { width: 100%; }
+      .modal-main-photo { min-height: 220px; max-height: 260px; }
+      .modal-info { padding: 20px; }
+      .modal-model-el { font-size: 30px; }
+      .modal-price-val { font-size: 34px; }
+      .modal-overlay { padding: 0; align-items: flex-end; }
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <a href="../" class="nav-logo">JOTA<span>CAR</span></a>
-  <a href="../" class="nav-back">← Voltar ao site</a>
-</nav>
-<div class="page-head">
-  <span class="page-tag">Disponível agora</span>
-  <h1 class="page-title">Estoque <span>Completo</span></h1>
-  <p class="page-count" id="pcount"></p>
+
+<!-- LOADER -->
+<div id="loader">
+  <img class="loader-logo" src="https://implacavelautomoveis.com.br/Content/images/logo.png" alt="Implacável Automóveis" onerror="this.style.display='none'">
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <p class="loader-text">Sincronizando estoque...</p>
 </div>
-<div class="filters">
-  <input type="text" class="f-input" id="fs" placeholder="🔍  Buscar marca ou modelo...">
-  <select class="f-sel" id="fcat"><option value="">Categoria</option><option value="moto">Moto</option><option value="hatch">Hatch</option><option value="sedan">Sedan</option><option value="suv">SUV</option><option value="picape">Picape</option><option value="outros">Outros</option></select>
-  <select class="f-sel" id="fmarca"><option value="">Marca</option></select>
-  <select class="f-sel" id="fano"><option value="">Ano</option></select>
-  <select class="f-sel" id="fpreco"><option value="">Faixa de Preço</option><option value="0-50000">Até R$ 50k</option><option value="50000-80000">R$ 50k–80k</option><option value="80000-130000">R$ 80k–130k</option><option value="130000-999999">Acima de R$ 130k</option></select>
-  <button class="f-reset" onclick="resetF()">✕ Limpar</button>
-</div>
-<div id="s-grid"></div>
+
+<!-- WPP FLOAT -->
+<a href="https://wa.me/5521972297326?text=Olá!%20Estou%20no%20estoque%20da%20Implacável%20e%20quero%20mais%20informações." class="wpp-float" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
 <!-- MODAL -->
-<div class="modal-bg" id="modal">
-  <div class="modal-box">
-    <div class="m-close" onclick="closeM()">✕</div>
-    <div class="m-gallery"><img id="m-img" src="" alt=""><div class="m-gall-nav"><div class="g-btn" onclick="pImg(-1)">&#8592;</div><div class="g-btn" onclick="pImg(1)">&#8594;</div></div><div class="m-dots" id="m-dots"></div></div>
-    <div class="m-body">
-      <div class="m-brand" id="m-brand"></div>
-      <div class="m-title" id="m-title"></div>
-      <div class="m-price" id="m-price"></div>
-      <div class="m-specs" id="m-specs"></div>
-      <div id="m-acess"></div>
-      <button class="m-wpp" onclick="wppCar()"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Tenho Interesse — WhatsApp</button>
+<div class="modal-overlay" id="veiculoModal" onclick="handleModalOverlayClick(event)">
+  <div class="modal-container">
+    <button class="modal-close" onclick="closeModal()" title="Fechar">✕</button>
+    <div class="modal-gallery">
+      <div class="modal-main-photo">
+        <img class="modal-main-img" id="modalMainImg" src="" alt="Foto do veículo">
+        <button class="modal-nav prev" onclick="navPhoto(-1)">&#8249;</button>
+        <button class="modal-nav next" onclick="navPhoto(1)">&#8250;</button>
+        <div class="modal-photo-counter"><span id="modalPhotoIdx">1</span> / <span id="modalPhotoTotal">1</span></div>
+      </div>
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
+    <div class="modal-info">
+      <div class="modal-ano-badge" id="modalAnoBadge">2024/2024</div>
+      <div class="modal-brand-el" id="modalBrandEl"></div>
+      <div class="modal-model-el" id="modalModelEl"></div>
+      <div class="modal-versao-el" id="modalVersaoEl"></div>
+      <hr class="modal-divider">
+      <div class="modal-specs-grid">
+        <div class="modal-spec"><span class="modal-spec-label">Quilometragem</span><span class="modal-spec-val" id="modalKmEl">–</span></div>
+        <div class="modal-spec"><span class="modal-spec-label">Câmbio</span><span class="modal-spec-val" id="modalCambioEl">–</span></div>
+        <div class="modal-spec"><span class="modal-spec-label">Combustível</span><span class="modal-spec-val" id="modalCombEl">–</span></div>
+        <div class="modal-spec"><span class="modal-spec-label">Ano</span><span class="modal-spec-val" id="modalAnoEl">–</span></div>
+      </div>
+      <div class="modal-price-block">
+        <div class="modal-price-label">Preço</div>
+        <div class="modal-price-val" id="modalPrecoEl">–</div>
+      </div>
+      <div class="modal-actions">
+        <a class="modal-wpp-btn" id="modalWppBtn" href="#" target="_blank">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Tenho Interesse — WhatsApp
+        </a>
+        <div class="modal-codigo" id="modalCodigoEl"></div>
+      </div>
     </div>
   </div>
 </div>
-<a href="https://wa.me/5554992222216" class="float-w" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html"><img class="nav-logo" src="https://implacavelautomoveis.com.br/Content/images/logo.png" alt="Implacável Automóveis" onerror="this.alt='IMPLACÁVEL'"></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="estoque.html" class="active">Estoque</a></li>
+    <li><a href="index.html#financiamento">Financiamento</a></li>
+    <li><a href="index.html#contato">Contato</a></li>
+    <li><a href="https://wa.me/5521972297326" target="_blank" class="nav-cta">Falar Agora</a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <p class="page-label">Atualizado em tempo real</p>
+      <h1 class="page-title">NOSSO ESTOQUE</h1>
+    </div>
+    <p class="page-count"><span id="countNum">–</span> veículos disponíveis</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="filter-group">
+    <span class="filter-label">Marca</span>
+    <select class="filter-select" id="filterMarca" onchange="applyFilters()"><option value="">Todas</option></select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Câmbio</span>
+    <select class="filter-select" id="filterCambio" onchange="applyFilters()">
+      <option value="">Todos</option>
+      <option value="Manual">Manual</option>
+      <option value="Automático">Automático</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Ano mínimo</span>
+    <select class="filter-select" id="filterAno" onchange="applyFilters()"><option value="">Todos</option></select>
+  </div>
+  <div class="filter-search">
+    <span class="filter-label">Buscar</span>
+    <input class="filter-input" id="filterSearch" type="text" placeholder="Ex: Duster, Corolla, Honda..." oninput="applyFilters()">
+  </div>
+  <button class="filter-reset" onclick="resetFilters()">Limpar</button>
+</div>
+
+<!-- SORT BAR -->
+<div class="sort-bar">
+  <p class="sort-info">Exibindo <strong id="visibleCount">–</strong> veículos</p>
+  <div class="sort-group">
+    <span class="sort-label">Ordenar:</span>
+    <button class="sort-btn active" onclick="sortBy('recente', this)">Mais Recentes</button>
+    <button class="sort-btn" onclick="sortBy('km_asc', this)">Menor KM</button>
+    <button class="sort-btn" onclick="sortBy('ano_desc', this)">Mais Novo</button>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="estoque-wrap">
+  <div class="estoque-grid" id="estoqueGrid">
+    <div class="card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div></div>
+    <div class="card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div></div>
+    <div class="card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div></div>
+    <div class="card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div></div>
+    <div class="card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div></div>
+    <div class="card-skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line w60"></div><div class="skeleton-line w80"></div><div class="skeleton-line w60"></div></div></div>
+  </div>
+  <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+    <button class="load-more-btn" id="loadMoreBtn" onclick="loadMore()">Carregar Mais</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-copy">© 2026 Implacável Automóveis · Nova Iguaçu - RJ</p>
+  <nav class="footer-links">
+    <a href="index.html">Início</a>
+    <a href="estoque.html">Estoque</a>
+    <a href="https://wa.me/5521972297326" target="_blank">WhatsApp</a>
+    <a href="https://www.instagram.com/implacavelautomoveis/" target="_blank">Instagram</a>
+  </nav>
+</footer>
+
 <script>
-const WPP='5554992222216';
-const VEHICLES=[
-  {vehicle_id:8020401,title:"HONDA CBR 600RR 2011",category:"MOTO",make:"HONDA",model:"CBR 600-RR",year:2011,fabric_year:2011,fuel:"GASOLINA",gear:"Manual",color:"BRANCO",price:"45900.00",valor_fipe:"44856.00",mileage:"0",body_type:null,hp:"0",doors:0,motorization:"599.0",accessories:"",images_large:["https://s3.carro57.com.br/FC/10861/8020401_5_W_6b4b0ac94f.jpeg","https://s3.carro57.com.br/FC/10861/8020401_0_W_5f7abe5163.jpeg","https://s3.carro57.com.br/FC/10861/8020401_5_W_fa322566a4.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_e422a43437.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_28622c7ac3.jpeg","https://s3.carro57.com.br/FC/10861/8020401_1_W_2bc1a8db1b.jpeg"]},
-  {vehicle_id:7808834,title:"FIAT SIENA ESSENCE 1.6 2014",category:"AUTOMÓVEL",make:"FIAT",model:"SIENA ESSENCE 1.6",year:2014,fabric_year:2013,fuel:"FLEX",gear:"Semi-automático",color:"PRETO",price:"39900.00",valor_fipe:0,mileage:"0",body_type:"sedan",hp:"117",doors:5,motorization:"1.6",accessories:"ABS,Airbag,Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve,Som Multimídia,Rádio Bluetooth",images_large:["https://s3.carro57.com.br/FC/10861/7808834_4_W_dede1d0418.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_44fbde5866.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_dc1672da50.jpeg","https://s3.carro57.com.br/FC/10861/7808834_0_W_353afd3d97.jpeg","https://s3.carro57.com.br/FC/10861/7808834_4_W_bee5fba397.jpeg"]},
-  {vehicle_id:7914466,title:"CHEVROLET CRUZE LT NB 2012",category:"AUTOMÓVEL",make:"CHEVROLET",model:"CRUZE LT NB",year:2012,fabric_year:2012,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"53900.00",valor_fipe:"51033.00",mileage:"0",body_type:"sedan",hp:"144",doors:5,motorization:"1.8",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve,Computador de Bordo,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7914466_4_W_edf130ce12.jpeg","https://s3.carro57.com.br/FC/10861/7914466_0_W_3c2caf3fbc.jpeg","https://s3.carro57.com.br/FC/10861/7914466_6_W_e367d69fe3.jpeg","https://s3.carro57.com.br/FC/10861/7914466_0_W_3b31ac833d.jpeg"]},
-  {vehicle_id:8027564,title:"HONDA HR-V EXL CVT 2020",category:"AUTOMÓVEL",make:"HONDA",model:"HR-V EXL CVT",year:2020,fabric_year:2019,fuel:"FLEX",gear:"CVT",color:"CINZA",price:"114900.00",valor_fipe:"108916.00",mileage:"117000",body_type:"suv",hp:"140",doors:4,motorization:"1.8",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,Direção Elétrica,GPS,Piloto Automático,Rádio Bluetooth",images_large:["https://s3.carro57.com.br/FC/10861/8027564_0_W_14bdb2e966.jpeg","https://s3.carro57.com.br/FC/10861/8027564_4_W_cbebcfba61.jpeg","https://s3.carro57.com.br/FC/10861/8027564_5_W_23ad4384f3.jpeg","https://s3.carro57.com.br/FC/10861/8027564_5_W_02e421cbc9.jpeg"]},
-  {vehicle_id:8007075,title:"TOYOTA RAV4 4X2 2019",category:"AUTOMÓVEL",make:"TOYOTA",model:"RAV4 4X2 20L",year:2019,fabric_year:2018,fuel:"GASOLINA",gear:"CVT",color:"BRANCO",price:"129900.00",valor_fipe:"129922.00",mileage:"0",body_type:"suv",hp:"145",doors:5,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Câmbio Automático,GPS,Teto Solar,Piloto Automático",images_large:["https://s3.carro57.com.br/FC/10861/8007075_1_W_963a4b12a1.jpeg","https://s3.carro57.com.br/FC/10861/8007075_1_W_63d2f2f2b2.jpeg","https://s3.carro57.com.br/FC/10861/8007075_1_W_3b73cb433a.jpeg","https://s3.carro57.com.br/FC/10861/8007075_0_W_f6d2ff68e9.jpeg"]},
-  {vehicle_id:8010559,title:"BMW X2 SDRIVE20I 2019",category:"AUTOMÓVEL",make:"BMW",model:"X2 SDRIVE20I",year:2019,fabric_year:2018,fuel:"GASOLINA",gear:"Automático",color:"PRETO",price:"173900.00",valor_fipe:"163880.00",mileage:"0",body_type:"suv",hp:"192",doors:4,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Bancos de Couro,Teto Solar,Farol de Led,GPS,Turbo",images_large:["https://s3.carro57.com.br/FC/10861/8010559_6_W_69655949dc.jpeg","https://s3.carro57.com.br/FC/10861/8010559_1_W_54ee9c744b.jpeg","https://s3.carro57.com.br/FC/10861/8010559_6_W_b06925ff3f.jpeg","https://s3.carro57.com.br/FC/10861/8010559_1_W_9eb251d888.jpeg"]},
-  {vehicle_id:7445142,title:"SUZUKI GSX-S750 2022",category:"MOTO",make:"SUZUKI",model:"GSX-S750 A",year:2022,fabric_year:2021,fuel:"GASOLINA",gear:"Manual",color:"PRETO",price:"55900.00",valor_fipe:"51030.00",mileage:"7800",body_type:null,hp:"114",doors:0,motorization:"749.0",accessories:"",images_large:["https://s3.carro57.com.br/FC/10861/7445142_0_W_59c3e52a64.jpeg","https://s3.carro57.com.br/FC/10861/7445142_0_W_9029fb7ac0.jpeg","https://s3.carro57.com.br/FC/10861/7445142_1_W_64897b879a.jpeg"]},
-  {vehicle_id:7973922,title:"CHEVROLET CRUZE LTZ NB 2018",category:"AUTOMÓVEL",make:"CHEVROLET",model:"CHEV CRUZE LTZ NB AT",year:2018,fabric_year:2017,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"91900.00",valor_fipe:"86258.00",mileage:"0",body_type:"sedan",hp:"153",doors:4,motorization:"1.4",accessories:"ABS,Airbag,Bancos de Couro,GPS,Turbo,Piloto Automático,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/7973922_0_W_f633dd1bef.jpeg","https://s3.carro57.com.br/FC/10861/7973922_4_W_85faebd912.jpeg","https://s3.carro57.com.br/FC/10861/7973922_2_W_48291f3c06.jpeg"]},
-  {vehicle_id:7869196,title:"VOLKSWAGEN GOL 2015",category:"AUTOMÓVEL",make:"VOLKSWAGEN",model:"GOL TL MB S",year:2015,fabric_year:2014,fuel:"FLEX",gear:"Manual",color:"BRANCO",price:"38900.00",valor_fipe:"36585.00",mileage:"0",body_type:"hatch",hp:"76",doors:5,motorization:"1.0",accessories:"ABS,Airbag,Ar-condicionado,Direção Hidráulica,Trava Elétrica,Vidros Elétricos",images_large:["https://s3.carro57.com.br/FC/10861/7869196_2_W_e848e84bab.jpeg","https://s3.carro57.com.br/FC/10861/7869196_4_W_3d623ee088.jpeg","https://s3.carro57.com.br/FC/10861/7869196_2_W_d6b36705a2.jpeg"]},
-  {vehicle_id:7970323,title:"MITSUBISHI PAJERO TR4 2007",category:"AUTOMÓVEL",make:"MITSUBISHI",model:"PAJERO TR4",year:2007,fabric_year:2007,fuel:"GASOLINA",gear:"Automático",color:"PRETO",price:"47900.00",valor_fipe:"43115.00",mileage:"0",body_type:"suv",hp:"131",doors:5,motorization:"2.0",accessories:"ABS,Airbag,Ar-condicionado,Câmbio Automático,Rodas de Liga Leve,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7970323_5_W_cb2c2817a5.jpeg","https://s3.carro57.com.br/FC/10861/7970323_1_W_319b12e7da.jpeg","https://s3.carro57.com.br/FC/10861/7970323_0_W_1737868cfa.jpeg"]},
-  {vehicle_id:6503860,title:"TOYOTA HILUX 2018",category:"AUTOMÓVEL",make:"TOYOTA",model:"HILUX CDSRXA4FD",year:2018,fabric_year:2017,fuel:"DIESEL",gear:"Automático",color:"PRATA",price:"197900.00",valor_fipe:"187401.00",mileage:"0",body_type:"caminhonete",hp:"177",doors:4,motorization:"2.8",accessories:"ABS,Airbag,Bancos de Couro,GPS,Teto Solar,Turbo,Câmera de ré,Farol de Led",images_large:["https://s3.carro57.com.br/FC/10861/6503860_1_W_aa295036a7.jpeg","https://s3.carro57.com.br/FC/10861/6503860_0_W_18094e307d.jpeg","https://s3.carro57.com.br/FC/10861/6503860_0_W_027ab3f58d.jpeg"]},
-  {vehicle_id:7799622,title:"RENAULT SANDERO 2021",category:"AUTOMÓVEL",make:"RENAULT",model:"SANDERO SZE16MT",year:2021,fabric_year:2020,fuel:"FLEX",gear:"Manual",color:"PRATA",price:"62900.00",valor_fipe:"59439.00",mileage:"0",body_type:"hatch",hp:"118",doors:4,motorization:"1.6",accessories:"ABS,Airbag,Ar-condicionado,Rodas de Liga Leve,Sensor de estacionamento",images_large:["https://s3.carro57.com.br/FC/10861/7799622_3_W_ce091c0b35.jpeg","https://s3.carro57.com.br/FC/10861/7799622_3_W_871efb921b.jpeg","https://s3.carro57.com.br/FC/10861/7799622_3_W_a815208c3b.jpeg"]},
-  {vehicle_id:7409059,title:"HONDA CIVIC SPORT CVT 2017",category:"AUTOMÓVEL",make:"HONDA",model:"CIVIC SPORT CVT",year:2017,fabric_year:2016,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"102900.00",valor_fipe:"99204.00",mileage:"120000",body_type:"sedan",hp:"155",doors:4,motorization:"2.0",accessories:"ABS,Airbag,GPS,Farol de Led,Câmera de ré,Piloto Automático",images_large:["https://s3.carro57.com.br/FC/10861/7409059_0_W_7b9504d56e.jpeg","https://s3.carro57.com.br/FC/10861/7409059_3_W_0f9bd598ec.jpeg","https://s3.carro57.com.br/FC/10861/7409059_1_W_818e220320.jpeg"]},
-  {vehicle_id:7591422,title:"CITROEN C3 AIRCROSS 2012",category:"AUTOMÓVEL",make:"CITROEN",model:"C3 AIRCROSS GLXA",year:2012,fabric_year:2011,fuel:"FLEX",gear:"Automático",color:"PRATA",price:"39900.00",valor_fipe:"30445.00",mileage:"92000",body_type:"suv",hp:"113",doors:5,motorization:"1.6",accessories:"Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7591422_2_W_2477fd6e90.jpeg","https://s3.carro57.com.br/FC/10861/7591422_7_W_c16d990ecb.jpeg","https://s3.carro57.com.br/FC/10861/7591422_1_W_0984cc76e0.jpeg"]},
-  {vehicle_id:7813728,title:"CHEVROLET MERIVA PREMIUM 2011",category:"AUTOMÓVEL",make:"CHEVROLET",model:"MERIVA PREMIUM",year:2011,fabric_year:2010,fuel:"FLEX",gear:"Semi-automático",color:"PRETO",price:"27900.00",valor_fipe:"30168.00",mileage:"0",body_type:null,hp:"114",doors:5,motorization:"1.8",accessories:"Ar-condicionado,Câmbio Automático,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7813728_6_W_108b961ebb.jpeg","https://s3.carro57.com.br/FC/10861/7813728_2_W_664652fc72.jpeg","https://s3.carro57.com.br/FC/10861/7813728_3_W_35291edbe2.jpeg"]},
-  {vehicle_id:8019098,title:"FORD FOCUS SE 1.6 2017",category:"AUTOMÓVEL",make:"FORD",model:"FOCUS SE 1.6 HC",year:2017,fabric_year:2017,fuel:"FLEX",gear:"Manual",color:"CINZA",price:"72900.00",valor_fipe:0,mileage:"0",body_type:"hatch",hp:"135",doors:4,motorization:"1.6",accessories:"ABS,Airbag,Bancos de Couro,GPS,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/8019098_5_W_c8110edea7.jpeg","https://s3.carro57.com.br/FC/10861/8019098_5_W_1b6f31d8e4.jpeg","https://s3.carro57.com.br/FC/10861/8019098_1_W_cf9ec19eaf.jpeg"]},
-  {vehicle_id:8011266,title:"JEEP COMPASS SPORT 2022",category:"AUTOMÓVEL",make:"JEEP",model:"COMPASS SPORT TF",year:2022,fabric_year:2021,fuel:"FLEX",gear:"Automático",color:"PRETO",price:"0.00",valor_fipe:"108897.00",mileage:"0",body_type:"suv",hp:"185",doors:4,motorization:"1.3",accessories:"ABS,Airbag,Bancos de Couro,GPS,Farol de Led,Turbo,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/8011266_4_W_9f1120f017.jpeg","https://s3.carro57.com.br/FC/10861/8011266_3_W_e16e8a7c98.jpeg","https://s3.carro57.com.br/FC/10861/8011266_4_W_0e7145635d.jpeg"]},
-  {vehicle_id:7757483,title:"JEEP RENEGADE LNGTD 2016",category:"AUTOMÓVEL",make:"JEEP",model:"RENEGADE LNGTD AT",year:2016,fabric_year:2015,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"75900.00",valor_fipe:"66372.00",mileage:"0",body_type:"suv",hp:"132",doors:4,motorization:"1.8",accessories:"ABS,Airbag,Teto Solar,GPS,Câmera de ré,Farol de Neblina",images_large:["https://s3.carro57.com.br/FC/10861/7757483_1_W_9222bece10.jpeg","https://s3.carro57.com.br/FC/10861/7757483_5_W_c96a4bd143.jpeg","https://s3.carro57.com.br/FC/10861/7757483_5_W_382ed9a1d7.jpeg"]},
-  {vehicle_id:7913290,title:"TOYOTA YARIS HB 2019",category:"AUTOMÓVEL",make:"TOYOTA",model:"YARIS HB XLPLUSAT",year:2019,fabric_year:2019,fuel:"FLEX",gear:"Automático",color:"BRANCO",price:"79900.00",valor_fipe:"75201.00",mileage:"0",body_type:"hatch",hp:"101",doors:4,motorization:"1.3",accessories:"ABS,Airbag,Ar-condicionado,GPS,Câmera de ré",images_large:["https://s3.carro57.com.br/FC/10861/7913290_4_W_ea6524901c.jpeg","https://s3.carro57.com.br/FC/10861/7913290_2_W_73bf15b1ab.jpeg","https://s3.carro57.com.br/FC/10861/7913290_4_W_113d363fc6.jpeg"]},
-  {vehicle_id:7937030,title:"VOLKSWAGEN GOLF 1.6 2009",category:"AUTOMÓVEL",make:"VOLKSWAGEN",model:"GOLF 1.6 SPORTLINE",year:2009,fabric_year:2008,fuel:"FLEX",gear:"Manual",color:"PRATA",price:"44900.00",valor_fipe:"43166.00",mileage:"0",body_type:"hatch",hp:"104",doors:5,motorization:"1.6",accessories:"ABS,Airbag,Bancos de Couro,Direção Hidráulica,Rodas de Liga Leve",images_large:["https://s3.carro57.com.br/FC/10861/7937030_6_W_8caf561276.jpeg","https://s3.carro57.com.br/FC/10861/7937030_3_W_ac70ef8c65.jpeg","https://s3.carro57.com.br/FC/10861/7937030_3_W_c8a98c7bfe.jpeg"]}
-];
-let curV=null,curImg=0,imgs=[];
-function detectCat(v){if(v.category==='MOTO')return'moto';const b=(v.body_type||'').toLowerCase();const m=(v.model||v.title||'').toLowerCase();if(b==='hatch'||m.includes('gol')||m.includes('polo')||m.includes('golf')||m.includes('focus')||m.includes('yaris')||m.includes('sandero'))return'hatch';if(b==='sedan'||m.includes('civic')||m.includes('corolla')||m.includes('cruze')||m.includes('siena'))return'sedan';if(b==='suv'||m.includes('hrv')||m.includes('compass')||m.includes('renegade')||m.includes('rav4')||m.includes('x2')||m.includes('pajero')||m.includes('aircross'))return'suv';if(b==='caminhonete'||m.includes('hilux'))return'picape';return'outros';}
-function populateFilters(vs){const ms=[...new Set(vs.map(v=>v.make).filter(Boolean))].sort();const as=[...new Set(vs.map(v=>v.year).filter(Boolean))].sort((a,b)=>b-a);const mSel=document.getElementById('fmarca'),aSel=document.getElementById('fano');ms.forEach(m=>mSel.innerHTML+=`<option value="${m}">${m}</option>`);as.forEach(a=>aSel.innerHTML+=`<option value="${a}">${a}</option>`);}
-function renderStock(vs){const g=document.getElementById('s-grid');document.getElementById('pcount').textContent=vs.length+' veículo'+(vs.length!==1?'s':'')+' encontrado'+(vs.length!==1?'s':'');if(!vs.length){g.innerHTML='<div class="no-res">Nenhum veículo encontrado.</div>';return;}g.innerHTML=vs.map(v=>{const img=(v.images_large&&v.images_large[0])||'';const p=parseFloat(v.price),fipe=parseFloat(v.valor_fipe);const isFipe=p>0&&fipe>0&&p<fipe;const pFmt=p>0?'R$ '+p.toLocaleString('pt-BR'):'Consultar';const ano=v.fabric_year&&v.year&&String(v.fabric_year)!==String(v.year)?`${v.fabric_year}/${v.year}`:String(v.year||'');const km=parseFloat(v.mileage||0);const kmFmt=km>0?km.toLocaleString('pt-BR')+' km':'—';return`<div class="v-card" onclick="openM(${v.vehicle_id})"><div class="v-img">${img?`<img src="${img}" alt="${v.model}" loading="lazy">`:'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#333">🚗</div>'}<div class="v-fipe">${isFipe?'⭐ ABAIXO DA FIPE':''}</div><div class="v-cat">${detectCat(v).toUpperCase()}</div></div><div class="v-info"><div class="v-brand">${v.make||''}</div><div class="v-name">${(v.model||v.title||'').toUpperCase()}</div><div class="v-meta">${ano} · ${kmFmt} · ${v.color||''}</div><div class="v-price-row"><div class="v-price">${pFmt}</div><button class="v-btn">Ver →</button></div></div></div>`;}).join('');}
-function applyF(){const s=document.getElementById('fs').value.toLowerCase();const cat=document.getElementById('fcat').value;const marca=document.getElementById('fmarca').value;const ano=document.getElementById('fano').value;const pr=document.getElementById('fpreco').value;let f=VEHICLES.filter(v=>{const full=((v.make||'')+(v.model||v.title||'')).toLowerCase();if(s&&!full.includes(s))return false;if(cat&&detectCat(v)!==cat)return false;if(marca&&v.make!==marca)return false;if(ano&&String(v.year)!==ano)return false;if(pr){const[min,max]=pr.split('-').map(Number);const p=parseFloat(v.price||0);if(p<min||p>max)return false;}return true;});renderStock(f);}
-function resetF(){['fs','fcat','fmarca','fano','fpreco'].forEach(id=>document.getElementById(id).value='');renderStock(VEHICLES);}
-['fs','fcat','fmarca','fano','fpreco'].forEach(id=>{const el=document.getElementById(id);el.addEventListener('change',applyF);if(id==='fs')el.addEventListener('input',applyF);});
-function openM(id){const v=VEHICLES.find(x=>x.vehicle_id===id);if(!v)return;curV=v;imgs=v.images_large||[];curImg=0;document.getElementById('m-brand').textContent=v.make||'';document.getElementById('m-title').textContent=(v.model||v.title||'').toUpperCase();const p=parseFloat(v.price);document.getElementById('m-price').textContent=p>0?'R$ '+p.toLocaleString('pt-BR'):'Consultar preço';document.getElementById('m-img').src=imgs[0]||'';const ano=v.fabric_year&&v.year&&String(v.fabric_year)!==String(v.year)?`${v.fabric_year}/${v.year}`:String(v.year||'');const km=parseFloat(v.mileage||0);document.getElementById('m-specs').innerHTML=[{l:'Ano',v:ano},{l:'KM',v:km>0?km.toLocaleString('pt-BR')+' km':'—'},{l:'Cor',v:v.color||'—'},{l:'Câmbio',v:v.gear||'—'},{l:'Combustível',v:v.fuel||'—'},{l:'Motor',v:v.motorization?v.motorization+' L':'—'}].map(s=>`<div><div class="ms-lbl">${s.l}</div><div class="ms-val">${s.v}</div></div>`).join('');const acs=(v.accessories||'').split(',').filter(a=>a.trim());document.getElementById('m-acess').innerHTML=acs.length?`<div class="m-acess-title">Acessórios</div><div class="m-acess-tags">${acs.map(a=>`<span class="m-tag">${a.trim()}</span>`).join('')}</div>`:'';document.getElementById('m-dots').innerHTML=imgs.map((_,i)=>`<div class="m-dot${i===0?' on':''}" onclick="setImg(${i})"></div>`).join('');document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
-function closeM(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
-function setImg(i){curImg=i;document.getElementById('m-img').src=imgs[i]||'';document.querySelectorAll('.m-dot').forEach((d,j)=>d.classList.toggle('on',j===i));}
-function pImg(d){setImg((curImg+d+imgs.length)%imgs.length);}
-function wppCar(){if(!curV)return;const model=(curV.make||'')+' '+(curV.model||curV.title||'');const msg=encodeURIComponent(`Olá! Tenho interesse no veículo:\n🚗 *${model} ${curV.year}*\n\nGostaria de mais informações e condições de pagamento.`);window.open(`https://wa.me/${WPP}?text=${msg}`,'_blank');}
-document.getElementById('modal').addEventListener('click',e=>{if(e.target===document.getElementById('modal'))closeM();});
-populateFilters(VEHICLES);
-renderStock(VEHICLES);
+  const CONFIG = {
+    webhookEstoque: 'https://apin8n.lv-mktdeconversa.com/webhook/estoque-imp',
+    whatsapp: '5521972297326',
+    pageSize: 12
+  };
+
+  const DEMO_VEICULOS = [
+    { CodigoVeiculo:4723036, Marca:'RENAULT',    Modelo:'Duster',   Versao:'1.6 16V SCE Flex Expression Manual',     AnoFab:2019, AnoMod:2020, KM:0,     Preco:69900,  Cambio:'Manual',     Combustivel:'Flex',     foto:'https://www.autocerto.com/fotos/6150/4723036/1_101157.jpg',    fotos:['https://www.autocerto.com/fotos/6150/4723036/1_101157.jpg'] },
+    { CodigoVeiculo:4662325, Marca:'TOYOTA',     Modelo:'Yaris',    Versao:'1.5 16V Flex XL Multidrive Automático', AnoFab:2023, AnoMod:2024, KM:27000, Preco:88900,  Cambio:'Automático', Combustivel:'Flex',     foto:'https://www.autocerto.com/fotos/6150/4662325/16_104535.jpg',   fotos:['https://www.autocerto.com/fotos/6150/4662325/16_104535.jpg'] },
+    { CodigoVeiculo:4301645, Marca:'HONDA',      Modelo:'HR-V',     Versao:'1.8 16V Flex EX 4P Automático',         AnoFab:2018, AnoMod:2018, KM:82499, Preco:93900,  Cambio:'Automático', Combustivel:'Flex',     foto:'https://www.autocerto.com/fotos/6150/4301645/10_121426.jpg',   fotos:['https://www.autocerto.com/fotos/6150/4301645/10_121426.jpg'] },
+    { CodigoVeiculo:4168722, Marca:'NISSAN',     Modelo:'Frontier', Versao:'2.3 16V Turbo Diesel S CD 4x4 Manual',  AnoFab:2019, AnoMod:2019, KM:155949,Preco:0,      Cambio:'Manual',     Combustivel:'Diesel',   foto:'https://www.autocerto.com/fotos/6150/4168722/10_110931.jpg',   fotos:['https://www.autocerto.com/fotos/6150/4168722/10_110931.jpg'] },
+    { CodigoVeiculo:4642824, Marca:'HYUNDAI',    Modelo:'HB20',     Versao:'1.6 Comfort Plus 16V Flex 4P Manual',   AnoFab:2015, AnoMod:2015, KM:0,     Preco:54900,  Cambio:'Manual',     Combustivel:'Flex',     foto:'https://www.autocerto.com/fotos/6150/4642824/7_110807.jpg',    fotos:['https://www.autocerto.com/fotos/6150/4642824/7_110807.jpg'] },
+    { CodigoVeiculo:4722779, Marca:'TOYOTA',     Modelo:'Corolla',  Versao:'1.6 XLI 16V Gasolina 4P Automático',   AnoFab:2007, AnoMod:2008, KM:0,     Preco:40900,  Cambio:'Automático', Combustivel:'Gasolina', foto:'https://www.autocerto.com/images/emBreve.jpg',                  fotos:[] },
+    { CodigoVeiculo:4642832, Marca:'FIAT',       Modelo:'Argo',     Versao:'1.0 Firefly Flex Manual',               AnoFab:2024, AnoMod:2025, KM:490000,Preco:74900,  Cambio:'Manual',     Combustivel:'Flex',     foto:'https://www.autocerto.com/fotos/6150/4642832/8_120931.jpg',    fotos:['https://www.autocerto.com/fotos/6150/4642832/8_120931.jpg'] },
+    { CodigoVeiculo:4045068, Marca:'FIAT',       Modelo:'Idea',     Versao:'1.4 MPI Fire ELX 8V Flex 4P Manual',   AnoFab:2009, AnoMod:2010, KM:0,     Preco:34900,  Cambio:'Manual',     Combustivel:'Flex',     foto:'https://www.autocerto.com/fotos/6150/4045068/17_121852.jpg',   fotos:['https://www.autocerto.com/fotos/6150/4045068/17_121852.jpg'] },
+  ];
+
+  let allVeiculos = [];
+  let veiculoMap  = {};
+  let filtered    = [];
+  let currentPage = 1;
+  let sortMode    = 'recente';
+  let currentFotos   = [];
+  let currentFotoIdx = 0;
+
+  function buildWppMsg(v) {
+    return [`Olá! Tenho interesse no veículo abaixo:`,``,
+      `🚗 *${v.Marca} ${v.Modelo}*`,`📋 ${v.Versao}`,
+      `📅 Ano: ${v.AnoFab}/${v.AnoMod}`,
+      `📍 KM: ${v.KM ? v.KM.toLocaleString('pt-BR') + ' km' : 'N/I'}`,
+      `⚙️ Câmbio: ${v.Cambio || 'N/I'}`,`⛽ Combustível: ${v.Combustivel || 'N/I'}`,
+      `💰 Preço: ${v.Preco ? 'R$ ' + v.Preco.toLocaleString('pt-BR') : 'Sob consulta'}`,
+      `🔖 Código: #${v.CodigoVeiculo}`,``,`Poderia me dar mais informações?`
+    ].join('\n');
+  }
+
+  function openModal(codigo) {
+    const v = veiculoMap[codigo];
+    if (!v) return;
+    currentFotos = (v.fotos && Array.isArray(v.fotos) && v.fotos.length > 0) ? v.fotos : [v.foto];
+    currentFotoIdx = 0;
+    const mainImg = document.getElementById('modalMainImg');
+    mainImg.src = currentFotos[0]; mainImg.classList.remove('fading');
+    document.getElementById('modalPhotoIdx').textContent   = 1;
+    document.getElementById('modalPhotoTotal').textContent = currentFotos.length;
+    const thumbsEl = document.getElementById('modalThumbs');
+    thumbsEl.innerHTML = currentFotos.map((f, i) => `<div class="modal-thumb ${i===0?'active':''}" onclick="selectThumb(${i})"><img src="${f}" alt="Foto ${i+1}" loading="lazy" onerror="this.parentElement.style.display='none'"></div>`).join('');
+    document.querySelector('#veiculoModal .modal-nav.prev').style.display = currentFotos.length > 1 ? 'flex' : 'none';
+    document.querySelector('#veiculoModal .modal-nav.next').style.display = currentFotos.length > 1 ? 'flex' : 'none';
+    document.getElementById('modalAnoBadge').textContent = `${v.AnoFab}/${v.AnoMod}`;
+    document.getElementById('modalBrandEl').textContent  = v.Marca;
+    document.getElementById('modalModelEl').textContent  = v.Modelo;
+    document.getElementById('modalVersaoEl').textContent = v.Versao;
+    document.getElementById('modalAnoEl').textContent    = `${v.AnoFab}/${v.AnoMod}`;
+    document.getElementById('modalKmEl').textContent     = v.KM ? v.KM.toLocaleString('pt-BR') + ' km' : 'N/I';
+    document.getElementById('modalCambioEl').textContent = v.Cambio || 'N/I';
+    document.getElementById('modalCombEl').textContent   = v.Combustivel || 'N/I';
+    document.getElementById('modalPrecoEl').textContent  = v.Preco ? 'R$ ' + v.Preco.toLocaleString('pt-BR') : 'Sob consulta';
+    document.getElementById('modalCodigoEl').textContent = `Código: #${v.CodigoVeiculo}`;
+    document.getElementById('modalWppBtn').href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(buildWppMsg(v))}`;
+    document.getElementById('veiculoModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() { document.getElementById('veiculoModal').classList.remove('open'); document.body.style.overflow = ''; }
+  function handleModalOverlayClick(e) { if (e.target === document.getElementById('veiculoModal')) closeModal(); }
+
+  function navPhoto(dir) { selectThumb((currentFotoIdx + dir + currentFotos.length) % currentFotos.length); }
+  function selectThumb(idx) {
+    currentFotoIdx = idx;
+    const mainImg = document.getElementById('modalMainImg');
+    mainImg.classList.add('fading');
+    setTimeout(() => { mainImg.src = currentFotos[idx]; mainImg.classList.remove('fading'); }, 180);
+    document.querySelectorAll('#veiculoModal .modal-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+    document.getElementById('modalPhotoIdx').textContent = idx + 1;
+    const thumbEl = document.querySelectorAll('#veiculoModal .modal-thumb')[idx];
+    if (thumbEl) thumbEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('veiculoModal').classList.contains('open')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') navPhoto(-1);
+    if (e.key === 'ArrowRight') navPhoto(1);
+  });
+
+  function buildCard(v, delay = 0) {
+    const km    = v.KM ? `${v.KM.toLocaleString('pt-BR')} km` : 'N/I';
+    const preco = v.Preco ? `R$ ${v.Preco.toLocaleString('pt-BR')}` : 'Sob consulta';
+    const wppUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(buildWppMsg(v))}`;
+    return `<div class="card" style="animation-delay:${delay}ms" onclick="handleCardClick(event, ${v.CodigoVeiculo})">
+      <div class="card-img-wrap">
+        <img class="card-img" src="${v.foto}" alt="${v.Marca} ${v.Modelo}" loading="lazy" onerror="this.onerror=null;this.style.opacity='0'">
+        <span class="card-badge">${v.AnoFab}/${v.AnoMod}</span>
+        <span class="card-km">${km}</span>
+        <div class="card-zoom-hint"><div class="card-zoom-icon"><svg viewBox="0 0 24 24" fill="white"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div></div>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">${v.Marca}</div>
+        <div class="card-model">${v.Modelo}</div>
+        <div class="card-versao">${v.Versao}</div>
+        <div class="card-tags">
+          <span class="card-tag">${v.Cambio || 'N/I'}</span>
+          <span class="card-tag">${v.Combustivel || 'N/I'}</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-price">${preco}</div>
+        <a href="${wppUrl}" target="_blank" class="card-wpp" onclick="event.stopPropagation()">Tenho Interesse</a>
+      </div>
+    </div>`;
+  }
+
+  function handleCardClick(event, codigo) {
+    if (event.target.closest('.card-wpp')) return;
+    openModal(codigo);
+  }
+
+  function renderGrid() {
+    const grid  = document.getElementById('estoqueGrid');
+    const end   = currentPage * CONFIG.pageSize;
+    const slice = filtered.slice(0, end);
+    if (!filtered.length) {
+      grid.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><h3 class="empty-title">Nenhum veículo encontrado</h3><p class="empty-text">Tente outros filtros ou fale com a gente no WhatsApp.</p><a href="https://wa.me/${CONFIG.whatsapp}?text=Olá!%20Não%20encontrei%20o%20veículo%20que%20procuro." target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#128C7E;color:#fff;padding:12px 28px;border-radius:2px;font-family:'Barlow Condensed';font-size:14px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;">Falar no WhatsApp</a></div>`;
+      document.getElementById('loadMoreWrap').style.display = 'none';
+      return;
+    }
+    grid.innerHTML = slice.map((v, i) => buildCard(v, i * 40)).join('');
+    const hasMore = filtered.length > end;
+    document.getElementById('loadMoreWrap').style.display = hasMore ? 'block' : 'none';
+    document.getElementById('visibleCount').textContent   = slice.length;
+  }
+
+  function loadMore() { currentPage++; renderGrid(); }
+
+  function applyFilters() {
+    const marca  = document.getElementById('filterMarca').value;
+    const cambio = document.getElementById('filterCambio').value;
+    const anoMin = parseInt(document.getElementById('filterAno').value) || 0;
+    const search = document.getElementById('filterSearch').value.toLowerCase().trim();
+    filtered = allVeiculos.filter(v => {
+      if (marca  && v.Marca  !== marca)  return false;
+      if (cambio && v.Cambio !== cambio) return false;
+      if (anoMin && v.AnoMod < anoMin)   return false;
+      if (search) { const hay = `${v.Marca} ${v.Modelo} ${v.Versao}`.toLowerCase(); if (!hay.includes(search)) return false; }
+      return true;
+    });
+    applySortToFiltered(); currentPage = 1; renderGrid();
+  }
+
+  function applySortToFiltered() {
+    if (sortMode === 'km_asc')   filtered.sort((a,b) => (a.KM||999999) - (b.KM||999999));
+    if (sortMode === 'ano_desc') filtered.sort((a,b) => b.AnoMod - a.AnoMod);
+  }
+
+  function sortBy(mode, btn) {
+    sortMode = mode;
+    document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applySortToFiltered(); currentPage = 1; renderGrid();
+  }
+
+  function resetFilters() {
+    document.getElementById('filterMarca').value  = '';
+    document.getElementById('filterCambio').value = '';
+    document.getElementById('filterAno').value    = '';
+    document.getElementById('filterSearch').value = '';
+    filtered = [...allVeiculos]; currentPage = 1; renderGrid();
+  }
+
+  function populateFilters() {
+    const marcas = [...new Set(allVeiculos.map(v => v.Marca))].sort();
+    const anos   = [...new Set(allVeiculos.map(v => v.AnoMod))].sort((a,b) => b-a);
+    const marcaEl = document.getElementById('filterMarca');
+    marcas.forEach(m => { const o = document.createElement('option'); o.value = m; o.textContent = m; marcaEl.appendChild(o); });
+    const anoEl = document.getElementById('filterAno');
+    anos.forEach(a => { const o = document.createElement('option'); o.value = a; o.textContent = a; anoEl.appendChild(o); });
+    document.getElementById('countNum').textContent     = allVeiculos.length;
+    document.getElementById('visibleCount').textContent = allVeiculos.length;
+  }
+
+  async function loadEstoque() {
+    let veiculos = [];
+    try { const res = await fetch(CONFIG.webhookEstoque); const data = await res.json(); veiculos = Array.isArray(data) ? data : (data.veiculos || []); } catch(e) { veiculos = []; }
+    if (!veiculos.length) veiculos = DEMO_VEICULOS;
+    allVeiculos = veiculos;
+    veiculoMap = {};
+    allVeiculos.forEach(v => { veiculoMap[v.CodigoVeiculo] = v; });
+    filtered = [...allVeiculos];
+    populateFilters();
+    renderGrid();
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => document.getElementById('loader').classList.add('hide'), 1200);
+    loadEstoque();
+  });
+
+  function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
 </script>
 </body>
 </html>
